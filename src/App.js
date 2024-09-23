@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./components/Navbar";
+import NotFound from "./components/NotFound";
+import Upload from "./components/Upload";
+import About from "./components/About";
+import Haiku from "./components/Haiku";
+import {Routes, Route} from "react-router-dom";
 
-function App() {
+function App(){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <Navbar className="container"/>
+      <Routes>
+        <Route path="*" element={<NotFound/>}/>
+        <Route path="/haiku" element={<Haiku />} />
+        <Route path="/upload" element={<Upload/>}/>
+        <Route path="/" element={<About/>}/>
+      </Routes>
+    </>
+
+  )
 }
 
 export default App;
