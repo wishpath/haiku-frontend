@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import haikuService from '../services/haiku.service';
-import './HaikuComponent.css';
+import '../styles/HaikuComponent.css';
 import loadingIcon from '../assets/loading.gif';
 
 const HaikuComponent = () => {
