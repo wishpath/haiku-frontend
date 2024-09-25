@@ -4,6 +4,10 @@ import '../styles/HaikuComponent.css';
 import loadingIcon from '../assets/loading.gif';
 
 const HaikuComponent = () => {
+
+    // 'haiku' - state variable - remembers value and re-renders the screen when changed using 'setHaiku'
+    // 'useState' - React Hook - returns an arr where arr[0] is initial value and arr[1] is an update function 
+    // 'setHaiku' - will also trigger a re-render of the component.
     const [haiku, setHaiku] = useState('');
     const [secret, setSecret] = useState('');
     const [result, setResult] = useState('');
@@ -12,12 +16,17 @@ const HaikuComponent = () => {
     const [isCalculated, setIsCalculated] = useState(false);
 
     const handleCalculate = async () => {
-        setError('');
+        setError('');``
         setResult('');
         setLoading(true);
 
         try {
             if (secret) {
+                // The 'await' keyword pauses the execution of the code until the Promise returned by 'haikuService.getHaiku(secret)' resolves.
+                // Without 'await', 'response' would be assigned the Promise object itself, rather than the resolved value of the Promise.
+                // Promise - a value that may be available in the future; allows code execution to continue immediately.
+                // Promise - would use .then() or .catch() to process the result and any errors.
+                // Using 'await' simplifies the code by allowing us to work directly with the resolved value.
                 const response = await haikuService.getHaiku(secret);
                 setResult(response.data);
             } else if (haiku) {
