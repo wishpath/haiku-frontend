@@ -1,31 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-    CssBaseline,
-    Toolbar,
-    Container,
-    Paper,
-    Grid,
-    Typography,
-    CircularProgress,
-    Fab,
-    LinearProgress
-} from "@mui/material";
-import { styled } from '@mui/material/styles';
 import { useDropzone } from 'react-dropzone';
 import axios from "axios";
-import CheckIcon from '@mui/icons-material/Check';
-import CloudUpload from '@mui/icons-material/CloudUpload';
 import employeeService from "../services/employee.service";
-
-const DropZoneContainer = styled(Paper)(({ theme }) => ({
-    height: 300,
-    background: "#efefef",
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: "center",
-    borderStyle: "dashed",
-    borderColor: "#aaa",
-}));
+import "../styles/styles.css"; // Assuming you have a CSS file for styles
 
 const Upload = () => {
     document.title = 'CSV Uploader'; 
@@ -82,66 +59,44 @@ const Upload = () => {
     }, []);
 
     return (
-        <>
-            <CssBaseline />
-            <Toolbar />
+        <div className="upload-container">
+            <h2>CSV File Uploader</h2>
+            <div {...getRootProps()} className="dropzone">
+                <input {...getInputProps()} />
+                {file ? <p>{file.name}</p> : <p>Drop or select a CSV file</p>}
+            </div>
 
-            <Container maxWidth="md">
-                <DropZoneContainer {...getRootProps()} elevation={0}>
-                    <input {...getInputProps()} />
-                    {file ? <p>{file.name}</p> : <p>Drop or select a CSV file</p>}
-                </DropZoneContainer>
+            {file && (
+                <div className="upload-actions">
+                    <button onClick={uploadFile} className="upload-button">
+                        {success ? "✅ Uploaded!" : "📤 Upload File"}
+                    </button>
+                    {loading && <p>Uploading... {percent}%</p>}
+                </div>
+            )}
 
-                {file && (
-                    <Grid container spacing={2} style={{ marginTop: 12 }}>
-                        <Grid item xs={12}>
-                            <Fab aria-label="save" color="primary" onClick={uploadFile}>
-                                {success ? <CheckIcon /> : <CloudUpload />}
-                            </Fab>
-                            {loading && <CircularProgress size={68} style={{ position: "absolute" }} />}
-                        </Grid>
-
-                        <Grid item xs={12}>
-                            {loading && (
-                                <>
-                                    <LinearProgress variant="determinate" value={percent} style={{ width: 200 }} />
-                                    <Typography variant="body1">{percent}%</Typography>
-                                </>
-                            )}
-                            {success && <Typography variant="body1">The file is successfully uploaded!</Typography>}
-                            {success && (
-                                <Typography variant="body1">
-                                    <a href={downloadUri} target="_blank" rel="noopener noreferrer">File URL</a>
-                                </Typography>
-                            )}
-                        </Grid>
-                    </Grid>
-                )}
-            </Container>
-
-            <Container maxWidth="md" style={{ marginTop: 20 }}>
-                <Paper elevation={4}>
-                    <table className="table table-bordered table-hover">
-                        <thead className="thead-dark">
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
+            <div className="employee-table">
+                <h3>Employee List</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {employees.map(employee => (
+                            <tr key={employee.id}>
+                                <td>{employee.name}</td>
+                                <td>{employee.email}</td>
+                                <td>{employee.phone}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {employees.map(employee => (
-                                <tr key={employee.id}>
-                                    <td>{employee.name}</td>
-                                    <td>{employee.email}</td>
-                                    <td>{employee.phone}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </Paper>
-            </Container>
-        </>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     );
 };
 

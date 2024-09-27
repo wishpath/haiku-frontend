@@ -72,6 +72,7 @@ const HaikuComponent = () => {
                         maxLength={30}
                         onChange={(e) => {
                             setIsCalculated(false);
+                            {/* e.target.value - whatever is entered in the field */}
                             setSecret(e.target.value);
                             if (e.target.value) setHaiku('');
                         }}

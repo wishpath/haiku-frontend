@@ -4,11 +4,11 @@ export default function Navbar() {
   return (
     <nav className="nav">
       <Link to="/" className="site-title">
-        Simonas Aruna
+      🕵️‍♂️ encrypt like a spy, 📜 write like a poet.
       </Link>
       <ul>
         <CustomLink to="/haiku">haiku-secret</CustomLink>
-        <CustomLink to="/upload">csv-uploader</CustomLink>
+        {/* <CustomLink to="/upload">csv-uploader</CustomLink> */}
         <CustomLink to="/">about</CustomLink>
       </ul>
     </nav>

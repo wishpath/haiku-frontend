@@ -1,43 +1,37 @@
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Toolbar from '@mui/material/Toolbar';
-import "../styles/styles.css"
+import "../styles/styles.css";
 
 const About = () => {
-document.title = 'About';
-  return(
+  document.title = 'About';
+  return (
     <>
-    <CssBaseline/>
-    <Toolbar/>
-
-    <Container maxWidth="md">
-        <Paper elevation={4}>
-            
+      <div className="toolbar" />
+      <div className="container" style={{ maxWidth: '768px', margin: 'auto', marginTop: '20px' }}>
+        <div className="paper" style={{
+          padding: '20px',
+          boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)', // Soft shadow effect
+          borderRadius: '4px',
+          backgroundColor: '#fff', // Optional: Set background color for the paper
+        }}>
           <div className="fl">
-            <br/>
-            <img src="https://avatars.githubusercontent.com/u/117854313?v=4" className="photo"/>
-            <br/>
-            <a>
-              This is a homework task solution for Sourcery Academy / Devbridge.
-            </a>
-            <a href="https://github.com/wishpath/CSVReaderBackendJavaH2">Source code - backend</a>
-            <a href="https://github.com/wishpath/-CSVReaderFrontendReact">Source code - frontend</a>
-            <br/>
-            <a>
-              Completed by Simonas Aruna, soon to be known as the best programmer ever:
-            </a>
+            <img src="https://avatars.githubusercontent.com/u/117854313?v=4" className="photo" alt="Profile" />
+            <br />
+            <a style={{ textShadow: '0px 0px 2px rgba(0, 0, 0, 0.2)' }}>Simonas Aruna</a>
+            <br />
+            <a>🔒 Committed  to mastering ✨ the craft of programming 💻</a>
+            <br />
             <a href="https://www.linkedin.com/in/simonas-aruna/">LinkedIn</a>
+            <br />
             <a href="https://github.com/wishpath">GitHub</a>
-            
-
+            <br />
             <a>+37063644328</a>
+            <br />
             <a>simonas.aruna[at]gmail.com</a>
-            <br/>
-          </div>   
-        </Paper>
-    </Container>
+            <br />
+          </div>
+        </div>
+      </div>
     </>
   );
 }
+
 export default About;

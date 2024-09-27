@@ -22,7 +22,8 @@
   }
   
   .site-title {
-    font-size: 1.5rem;
+    /* 'rem' is relative to the root font size, usually 16px */
+    font-size: 1rem;
   }
   
   .nav ul {
@@ -65,3 +66,60 @@
     flex-direction: column;
     align-items: center;
   }
+
+  .upload-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropzone {
+    height: 200px;
+    background: #efefef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.upload-actions {
+    margin-top: 10px;
+}
+
+.upload-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.upload-button:hover {
+    background-color: #0056b3;
+}
+
+.employee-table {
+    margin-top: 20px;
+}
+
+.employee-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.employee-table th, .employee-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.employee-table th {
+    background-color: #007bff;
+    color: white;
+}
