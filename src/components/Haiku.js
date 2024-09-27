@@ -20,7 +20,7 @@ const HaikuComponent = () => {
     //synchronous - tasks must complete one after another
     //async allows you to use await
     const handleCalculate = async () => {
-        setError('');``
+        setError('');
         setResult('');
         setLoading(true);
 
@@ -58,6 +58,10 @@ const HaikuComponent = () => {
 
     return (
         <div className="haiku-container">
+            {/* conditional rendering expression in React
+             asks if ('error' is truthy) render the 'p' element
+             falsy values are only - null, undefined, false, 0, NaN, ""
+             would also work: {error ? (<p className="error-message">Error: {error}</p>) : ()}*/}
             {error && <p className="error-message">Error: {error}</p>}
             <div className="input-group">
                 <label>
@@ -67,6 +71,7 @@ const HaikuComponent = () => {
                         value={secret}
                         maxLength={30}
                         onChange={(e) => {
+                            setIsCalculated(false);
                             setSecret(e.target.value);
                             if (e.target.value) setHaiku('');
                         }}
@@ -81,6 +86,8 @@ const HaikuComponent = () => {
                     <textarea
                         value={haiku}
                         onChange={(e) => {
+                            if(haiku || secret)
+                            setIsCalculated(false);
                             setHaiku(e.target.value);
                             if (e.target.value) setSecret('');
                         }}
@@ -104,16 +111,16 @@ const HaikuComponent = () => {
                     <button
                         className="calculate-button"
                         onClick={handleCalculate}
-                        disabled={loading || isCalculated}
+                        disabled={loading || (!haiku && !secret) || (isCalculated && haiku)} 
                     >
-                        Calculate
+                        {(isCalculated && secret) ? 'Rec' : 'C'}alculate
                     </button>
 
                     {/* Reset Button */}
                     <button
                         className="reset-button"
                         onClick={handleReset}
-                        disabled={!isCalculated}
+                        disabled={loading || (!haiku && !secret)} 
                     >
                         Reset
                     </button>
