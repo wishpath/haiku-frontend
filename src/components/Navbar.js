@@ -9,14 +9,14 @@ export default function Navbar() {
   return (
     <nav className="nav">
       <Link to="/" className="site-title">
-        🕵️‍♂️ encrypt like a spy, 📜 write like a poet.
+        🕵️‍♂️ encrypt like a spy 📜 write like a poet.
       </Link>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <ul>
           <CustomLink to="/haiku">haiku-secret</CustomLink>
           {/* <CustomLink to="/upload">csv-uploader</CustomLink> */}
           <CustomLink to="/">about</CustomLink>
-          <CustomLink to="/login">{isLoggedIn ? username : "login"}</CustomLink>
+          <CustomLink to="/login">{isLoggedIn ? ("👤 " + username) : "🔑 login"}</CustomLink>
         </ul>
       </div>
     </nav>

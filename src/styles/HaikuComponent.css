@@ -22,6 +22,7 @@ label {
     width: 100%;
     padding: 10px;
     font-size: 16px;
+    box-sizing: border-box; /* Fixes width issues */
 }
 
 .haiku-input {
@@ -51,8 +52,9 @@ label {
     color: white;
 }
 
-.calculate-button:disabled {
-    background-color: #cccccc; /* Gray out */
+.calculate-button:disabled,
+.reset-button:disabled {
+    background-color: #cccccc;
     cursor: not-allowed;
 }
 
@@ -63,124 +65,6 @@ label {
 .reset-button {
     background-color: red;
     color: white;
-}
-
-.reset-button:disabled {
-    background-color: #cccccc; /* Gray out */
-    cursor: not-allowed;
-}
-
-.reset-button:hover:enabled {
-    background-color: darkred;
-}
-
-.loading-message {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.loading-icon {
-    width: 24px;
-    height: 24px;
-}
-
-.button-group {
-    display: flex;
-    justify-content: space-between; /* Space between the loading message and buttons */
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.calculate-button,
-.reset-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, opacity 0.3s;
-}
-
-.calculate-button {
-    background-color: #007bff;
-    color: white;
-}
-
-.calculate-button:disabled {
-    background-color: #cccccc; /* Gray out */
-    cursor: not-allowed;
-}
-
-.calculate-button:hover:enabled {
-    background-color: #0056b3;
-}
-
-.reset-button {
-    background-color: red;
-    color: white;
-}
-
-.reset-button:disabled {
-    background-color: #cccccc; /* Gray out */
-    cursor: not-allowed;
-}
-
-.reset-button:hover:enabled {
-    background-color: darkred;
-}
-
-.loading-message {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.loading-icon {
-    width: 24px;
-    height: 24px;
-}
-
-.button-group {
-    display: flex;
-    justify-content: space-between; /* Space between loading message and buttons */
-    align-items: center;
-    margin-top: 10px;
-}
-
-.calculate-button,
-.reset-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, opacity 0.3s;
-}
-
-.calculate-button {
-    background-color: #007bff;
-    color: white;
-}
-
-.calculate-button:disabled {
-    background-color: #cccccc; /* Gray out */
-    cursor: not-allowed;
-}
-
-.calculate-button:hover:enabled {
-    background-color: #0056b3;
-}
-
-.reset-button {
-    background-color: red;
-    color: white;
-}
-
-.reset-button:disabled {
-    background-color: #cccccc; /* Gray out */
-    cursor: not-allowed;
 }
 
 .reset-button:hover:enabled {

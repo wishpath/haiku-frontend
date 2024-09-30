@@ -1,26 +1,37 @@
 // src/components/Login.js
+// React component might be used under the hood.
+// Curly braces are used when the name is strict, otherwise could be renamed
 import React, { useState } from 'react';
-import { useLogin } from '../context/LoginContext'; // Import your context
+import { useLogin } from '../context/LoginContext';
 
 const Login = () => {
-  const { login } = useLogin(); // Get the login function from context
+
+  // how login is accessed:
+  // LoginContext.js -> useContext(createContext()) -> useLogin() -> ... REACT MAGIC! ... -> LoginContext.Provider value -> login
+  const { login } = useLogin(); 
   const [inputUsername, setInputUsername] = useState('');
 
+  // event object
   const handleLogin = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevents the form from submitting
     login(inputUsername); // Call login with the username
     setInputUsername(''); // Clear the input
   };
 
   return (
+    //onSubmit attribute is a shorthand provided by React, so <form onSubmit={handleLogin(onSubmit)}> in't needed
+    //If you use <form onSubmit={handleLogin(onSubmit)}>, it will not prevent the default form submission
+    //handleLogin(onSubmit) would be excuted during render phase
     <form onSubmit={handleLogin}>
       <input 
-        type="text" 
-        value={inputUsername} 
-        onChange={(e) => setInputUsername(e.target.value)} 
+        type="text"
+        //will display whatever is in the variable "imputUsername"
+        value={inputUsername}
+        //after adding a letter, whatever is displayed will be stored in the variable "imputUsername"
+        onChange={(e) => setInputUsername(e.target.value)}
         placeholder="Enter username" 
       />
-      <button type="submit">Login</button>
+      <button type="submit">{"Login" + (inputUsername ? (" as " + inputUsername) : "") }</button>
     </form>
   );
 };

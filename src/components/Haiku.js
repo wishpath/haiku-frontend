@@ -63,9 +63,10 @@ const HaikuComponent = () => {
              falsy values are only - null, undefined, false, 0, NaN, ""
              would also work: {error ? (<p className="error-message">Error: {error}</p>) : ()}*/}
             {error && <p className="error-message">Error: {error}</p>}
+            {(!haiku) && 
             <div className="input-group">
                 <label>
-                    Secret:
+                {(secret) && "secret:"}
                     <input
                         type="text"
                         value={secret}
@@ -78,12 +79,14 @@ const HaikuComponent = () => {
                         }}
                         disabled={haiku.length > 0}
                         className="secret-input"
+                        placeholder="secret" 
                     />
                 </label>
-            </div>
+            </div>}
+            {(!secret) && 
             <div className="input-group">
                 <label>
-                    Haiku:
+                    {(haiku) && "haiku:"}
                     <textarea
                         value={haiku}
                         onChange={(e) => {
@@ -94,9 +97,10 @@ const HaikuComponent = () => {
                         }}
                         disabled={secret.length > 0}
                         className="haiku-input"
+                        placeholder="haiku" 
                     />
                 </label>
-            </div>
+            </div>}
             <div className="button-group">
                 {/* Loading Indicator on the far left */}
                 {loading && (
@@ -114,7 +118,7 @@ const HaikuComponent = () => {
                         onClick={handleCalculate}
                         disabled={loading || (!haiku && !secret) || (isCalculated && haiku)} 
                     >
-                        {(isCalculated && secret) ? 'Rec' : 'C'}alculate
+                        {((isCalculated && secret) ? 'rec' : 'c')}alculate {secret && "haiku"}{haiku && "secret"}
                     </button>
 
                     {/* Reset Button */}
@@ -123,7 +127,7 @@ const HaikuComponent = () => {
                         onClick={handleReset}
                         disabled={loading || (!haiku && !secret)} 
                     >
-                        Reset
+                        reset
                     </button>
                 </div>
             </div>

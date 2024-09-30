@@ -1,23 +1,25 @@
-import "../styles/styles.css";
+import "../styles/about.css";
 
+
+//no need for async - "const About = async () => {"
+// because doesn't involve any asynchronous operations such as API calls, file reading, or timers
 const About = () => {
+
+  //tab title
   document.title = 'About';
+
+  //returns JSX (React's syntax for rendering UI) (JavaScript XML)
   return (
     <>
       <div className="toolbar" />
-      <div className="container" style={{ maxWidth: '768px', margin: 'auto', marginTop: '20px' }}>
-        <div className="paper" style={{
-          padding: '20px',
-          boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)', // Soft shadow effect
-          borderRadius: '4px',
-          backgroundColor: '#fff', // Optional: Set background color for the paper
-        }}>
+      <div className="container">
+        <div className="paper">
           <div className="fl">
             <img src="https://avatars.githubusercontent.com/u/117854313?v=4" className="photo" alt="Profile" />
             <br />
-            <a style={{ textShadow: '0px 0px 2px rgba(0, 0, 0, 0.2)' }}>Simonas Aruna</a>
+            <a className="name">Simonas Aruna</a>
             <br />
-            <a>🔒 Committed  to mastering ✨ the craft of programming 💻</a>
+            <a className="motto">🔒 Committed to mastering ✨ the craft of programming 💻</a>
             <br />
             <a href="https://www.linkedin.com/in/simonas-aruna/">LinkedIn</a>
             <br />
@@ -32,6 +34,9 @@ const About = () => {
       </div>
     </>
   );
-}
+};
 
+//exported so that it can be imported and used in other parts of the application.
+//"export default" - allows when importing, giveing it any custom name like "import CustomName from './About'"
+//otherwise - "export { About };" would require exact naming "import { About } from './About';"
 export default About;
