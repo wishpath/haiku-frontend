@@ -66,7 +66,7 @@ const HaikuComponent = () => {
             {(!haiku) && 
             <div className="input-group">
                 <label>
-                {(secret) && "secret:"}
+                    {(secret) && <span className="field-title">secret:</span>}
                     <input
                         type="text"
                         value={secret}
@@ -79,14 +79,14 @@ const HaikuComponent = () => {
                         }}
                         disabled={haiku.length > 0}
                         className="secret-input"
-                        placeholder="secret" 
+                        placeholder="type secret" 
                     />
                 </label>
             </div>}
             {(!secret) && 
             <div className="input-group">
                 <label>
-                    {(haiku) && "haiku:"}
+                    {(haiku) && <span className="field-title">haiku:</span>}
                     <textarea
                         value={haiku}
                         onChange={(e) => {
@@ -97,7 +97,7 @@ const HaikuComponent = () => {
                         }}
                         disabled={secret.length > 0}
                         className="haiku-input"
-                        placeholder="haiku" 
+                        placeholder="or type haiku" 
                     />
                 </label>
             </div>}

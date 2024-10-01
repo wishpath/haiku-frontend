@@ -1,85 +1,44 @@
 /* styles/Navbar.css */
 .nav {
-    display: flex;
-    justify-content: space-between; /* Space between site title and links */
-    align-items: center; /* Align items vertically in the center */
-    padding: 1em; /* Add some padding */
-    background-color: transparent;
-  }
-  
-  .nav ul {
-    display: flex; /* Use flexbox for the list */
-    list-style: none; /* Remove default list styles */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
-  }
-  
-  .nav ul li {
-    margin-left: 20px; /* Space between links */
-  }
-  
-  .login-container {
-    display: flex; /* Use flexbox to align login button */
-    align-items: center; /* Center the items vertically */
-  }
-  
-  .login-button, .logout-button {
-    background-color: #007bff; /* Button background color */
-    color: white; /* Button text color */
-    border: none; /* Remove border */
-    padding: 0.5em 1em; /* Button padding */
-    border-radius: 5px; /* Round corners */
-    cursor: pointer; /* Change cursor to pointer */
-  }
-  
-  .login-button:hover, .logout-button:hover {
-    background-color: #0056b3; /* Darker color on hover */
-  }
+  display: flex;
+  justify-content: space-between; /* Space between site title and links */
+  align-items: center; /* Align items vertically in the center */
+  padding: 1em; /* Add some padding */
+  background-color: transparent;
+}
 
 .nav ul {
-    display: flex; /* Use flexbox for the list */
-    list-style: none; /* Remove default list styles */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
+  display: flex; /* Use flexbox for the list */
+  list-style: none; /* Remove default list styles */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
 }
 
 .nav ul li {
-    margin-left: 20px; /* Space between links */
+  margin-left: 20px; /* Space between links */
 }
 
 .site-title {
-    font-weight: bold;
-    color: white; /* Ensure title is visible */
+  color: white; /* Ensure title is visible */
+  height: 100%; /* Take up all available vertical space */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center text vertically */
+  font-weight: bold; /* Keep text bold */
+  transform: translateY(-2px); /* Lift text up*/
 }
 
 .nav a {
-    text-decoration: none;
-    color: white; /* Ensure the links are visible */
-    font-weight: 500;
+  text-decoration: none;
+  color: white; /* Ensure the links are visible */
+  font-weight: 500;
+  display: flex; /* Flexbox for vertical centering */
+  align-items: center; /* Center text vertically within link */
 }
 
 .nav a:hover {
-    color: #ddd; /* Change color on hover for better UX */
+  color: #ddd; /* Change color on hover for better UX */
 }
 
 .active a {
-    border-bottom: 2px solid white; /* Highlight active link */
-}
-
-.login-container {
-    display: flex; /* Use flexbox to align login button */
-    align-items: center; /* Center the items vertically */
-}
-
-.login-button, .logout-button {
-    background-color: #007bff; /* Button background color */
-    color: white; /* Button text color */
-    border: none; /* Remove border */
-    padding: 0.5em 1em; /* Button padding */
-    border-radius: 5px; /* Round corners */
-    cursor: pointer; /* Change cursor to pointer */
-}
-
-.login-button:hover, .logout-button:hover {
-    background-color: #0056b3; /* Darker color on hover */
+  border-bottom: 2px solid white; /* Highlight active link */
 }
