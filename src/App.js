@@ -1,4 +1,5 @@
 //App.js
+import './App.css';
 import Navbar from "./components/Navbar";
 import NotFound from "./components/NotFound";
 import Upload from "./components/Upload";
@@ -13,16 +14,16 @@ function App(){
 
     //components wrapped by LoginProvider have access to the LoginContext
     <LoginProvider>
-      
-      <Navbar className="container" />
-      <Routes>
-        <Route path="*" element={<NotFound />} />
-        <Route path="/haiku" element={<Haiku />} />
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<About />} />
-      </Routes>
-
+      <div className="app-background">
+        <Navbar className="container" />
+        <Routes>
+          <Route path="*" element={<NotFound />} />
+          <Route path="/haiku" element={<Haiku />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<About />} />
+        </Routes>
+      </div>
     </LoginProvider>
   )
 }

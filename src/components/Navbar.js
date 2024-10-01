@@ -2,6 +2,7 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { useLogin } from "../context/LoginContext";
 import Login from './Login';
+import '../styles/Navbar.css';
 
 export default function Navbar() {
   const { username, isLoggedIn } = useLogin(); // Use context to get username and login state

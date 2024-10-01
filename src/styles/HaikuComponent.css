@@ -17,12 +17,17 @@ label {
     margin-bottom: 5px;
 }
 
-.secret-input,
+.secret-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    box-sizing: border-box; 
+}
 .haiku-input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    box-sizing: border-box; /* Fixes width issues */
+    box-sizing: border-box;
 }
 
 .haiku-input {

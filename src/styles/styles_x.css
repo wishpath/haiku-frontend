@@ -10,16 +10,7 @@
     margin: 1rem;
     text-align: center;
   }
-  
-  .nav {
-    background-color: #333;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 2rem;
-    padding: 0 1rem;
-  }
+
   
   .site-title {
     /* 'rem' is relative to the root font size, usually 16px */
