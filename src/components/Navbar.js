@@ -13,7 +13,7 @@ export default function Navbar() {
         <ul>
           {/* <CustomLink to="/upload">csv-uploader</CustomLink> */}
           <CustomLink to="/">about</CustomLink>
-          <CustomLink to="/login">{isLoggedIn ? ("👤 " + username) : "🔑 login"}</CustomLink>
+          <CustomLink to="/login">{isLoggedIn ? ("🔑 " + username) : "🔑 login"}</CustomLink>
         </ul>
       </div>
     </nav>

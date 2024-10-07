@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import haikuService from '../services/haiku.service';
-import '../styles/HaikuComponent.css';
-import loadingIcon from '../assets/loading.gif';
+import haikuService from './tool/ServiceHaiku';
+import './tool/StyleHaiku.css';
+import './tool/StyleHaikuInput.css';
+import './tool/StyleHaikuButtons.css';
+import loadingIcon from './tool/HaikuResultLoadingSpinner.gif';
 
 const HaikuComponent = () => {
 
@@ -75,11 +77,12 @@ const HaikuComponent = () => {
                             setIsCalculated(false);
                             {/* e.target.value - whatever is entered in the field */}
                             setSecret(e.target.value);
+                            setResult('');
                             if (e.target.value) setHaiku('');
                         }}
                         disabled={haiku.length > 0}
                         className="secret-input"
-                        placeholder="type secret" 
+                        placeholder="whisper a secret" 
                     />
                 </label>
             </div>}
@@ -93,11 +96,12 @@ const HaikuComponent = () => {
                             if(haiku || secret)
                             setIsCalculated(false);
                             setHaiku(e.target.value);
+                            setResult('');
                             if (e.target.value) setSecret('');
                         }}
                         disabled={secret.length > 0}
                         className="haiku-input"
-                        placeholder="or type haiku" 
+                        placeholder="or echo a haiku" 
                     />
                 </label>
             </div>}
@@ -106,20 +110,24 @@ const HaikuComponent = () => {
                 {loading && (
                     <div className="loading-message">
                         <img src={loadingIcon} alt="Loading..." className="loading-icon" />
-                        <span>Calculating... This might take up to 30 seconds.</span>
+                        <span>The verses are weaving... A secret threads through, hidden in between, all within 30 seconds.</span>
                     </div>
                 )}
 
                 {/* Grouping the Calculate and Reset buttons on the far right */}
+                { ((haiku || secret) && !loading) &&
                 <div style={{ display: 'flex', gap: '10px', marginLeft: 'auto' }}>
                     {/* Calculate Button */}
+                    {!(haiku && isCalculated) &&
                     <button
                         className="calculate-button"
                         onClick={handleCalculate}
                         disabled={loading || (!haiku && !secret) || (isCalculated && haiku)} 
                     >
-                        {((isCalculated && secret) ? 'rec' : 'c')}alculate {secret && "haiku"}{haiku && "secret"}
-                    </button>
+                        {((isCalculated && secret) && 'reimagine a haiku')}
+                        {((!isCalculated && secret) && 'shelter within haiku')}
+                        {haiku && "reveal the secret"}
+                    </button>}
 
                     {/* Reset Button */}
                     <button
@@ -127,13 +135,14 @@ const HaikuComponent = () => {
                         onClick={handleReset}
                         disabled={loading || (!haiku && !secret)} 
                     >
-                        reset
+                        begin anew
                     </button>
-                </div>
+                </div>}
             </div>
 
             {/* Display result */}
-            <div className="result-display" dangerouslySetInnerHTML={{ __html: result }} />
+            { (haiku || secret) &&
+            <div className="result-display" dangerouslySetInnerHTML={{ __html: result }} />}
         </div>
     );
 };

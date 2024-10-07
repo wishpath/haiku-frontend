@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import NotFound from "./components/NotFound";
 import Upload from "./components/Upload";
 import About from "./components/About";
-import Haiku from "./components/Haiku";
+import Haiku from "./components/haiku/Haiku";
 import Login from "./components/Login";
 import {Routes, Route} from "react-router-dom";
 import { LoginProvider } from './context/LoginContext';

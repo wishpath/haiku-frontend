@@ -1,0 +1,40 @@
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+.calculate-button,
+.reset-button {
+    padding: 6px 12px; /* Reduced height by decreasing padding */
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Darker shadow */
+}
+.calculate-button {
+    background-color: #5a9bd8; /* Darker grayish-blue */
+    color: white;
+}
+.calculate-button:disabled,
+.reset-button:disabled {
+    background-color: #b0b0b0; /* Darker gray for disabled state */
+    cursor: not-allowed;
+}
+.calculate-button:hover:enabled {
+    background-color: #3f7eb3; /* Darker shade for hover state */
+}
+.reset-button {
+    background-color: #cc4c4c; /* Darker red */
+    color: white;
+}
+.reset-button:hover:enabled {
+    background-color: #b30000; /* Darker shade for hover state */
+}
+.loading-icon {
+    width: 24px;
+    height: 24px;
+}

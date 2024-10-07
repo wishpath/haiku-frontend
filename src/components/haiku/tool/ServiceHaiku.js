@@ -1,4 +1,4 @@
-import httpClient from '../http-common-haiku';
+import httpClient from './HttpCommonHaiku'; 
 
 const getHaiku = (secret) => {
     return httpClient.get(`/gethaiku?secret=${encodeURIComponent(secret)}`);
