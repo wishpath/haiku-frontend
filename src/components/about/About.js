@@ -1,4 +1,4 @@
-import "../styles/about.css";
+import "./tool/about.css";
 
 
 //no need for async - "const About = async () => {"

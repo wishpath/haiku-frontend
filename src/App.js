@@ -1,9 +1,9 @@
 //App.js
 import './App.css';
-import Navbar from "./components/Navbar";
-import NotFound from "./components/NotFound";
+import Navbar from "./components/navbar/Navbar";
+import NotFound from "./components/notfound/NotFound";
 import Upload from "./components/Upload";
-import About from "./components/About";
+import About from "./components/about/About";
 import Haiku from "./components/haiku/Haiku";
 import Login from "./components/Login";
 import {Routes, Route} from "react-router-dom";

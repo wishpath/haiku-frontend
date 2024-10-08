@@ -1,7 +1,7 @@
 // src/components/Navbar.js
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-import { useLogin } from "../context/LoginContext";
-import '../styles/Navbar.css';
+import { useLogin } from "../../context/LoginContext";
+import './tool/Navbar.css';
 
 export default function Navbar() {
   const { username, isLoggedIn } = useLogin(); // Use context to get username and login state
