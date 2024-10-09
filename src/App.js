@@ -2,10 +2,10 @@
 import './App.css';
 import Navbar from "./components/navbar/Navbar";
 import NotFound from "./components/notfound/NotFound";
-import Upload from "./components/Upload";
+import Upload from "./components/csvupload/CSVUpload";
 import About from "./components/about/About";
 import Haiku from "./components/haiku/Haiku";
-import Login from "./components/Login";
+import Login from "./components/login/Login";
 import {Routes, Route} from "react-router-dom";
 import { LoginProvider } from './context/LoginContext';
 

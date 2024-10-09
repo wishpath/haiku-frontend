@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDropzone } from 'react-dropzone';
 import axios from "axios";
-import employeeService from "../services/employee.service";
-// import "../styles/styles.css"; // Assuming you have a CSS file for styles
+import employeeService from "./tool/EmployeeService";
+import "./tool/CSVUpload.css";
 
 const Upload = () => {
     document.title = 'CSV Uploader'; 

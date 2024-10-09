@@ -2,7 +2,7 @@
 // React component might be used under the hood.
 // Curly braces are used when the name is strict, otherwise could be renamed
 import React, { useState } from 'react';
-import { useLogin } from '../context/LoginContext';
+import { useLogin } from '../../context/LoginContext';
 
 const Login = () => {
 

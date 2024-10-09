@@ -1,0 +1,103 @@
+/* Container Styling */
+.upload-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: transparent; /* Fully transparent container */
+    text-align: center;
+}
+
+/* Title Styling */
+.upload-container h2 {
+    color: white; /* White color for the title to stand out */
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.6); /* Soft centered shadow around the title */
+}
+
+/* Dropzone Styling */
+.dropzone {
+    margin: 15px 0;
+    padding: 20px;
+    border: 2px dashed #4a5a6a; /* Darker and grayer shade of blue */
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1); /* Light transparent background */
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    color: white; /* White text for visibility */
+}
+
+.dropzone:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly more visible on hover */
+    border-color: #394955; /* Even darker shade of blue */
+}
+
+/* File Upload Actions */
+.upload-actions {
+    margin: 15px 0;
+}
+
+.upload-button {
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #5c728a; /* Darker and grayer blue */
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+    background-color: #465564; /* Even darker blue for hover effect */
+}
+
+/* Progress Indicator */
+.uploading-message {
+    margin-top: 10px;
+    color: white; /* White text for contrast */
+    font-weight: bold;
+}
+
+/* Employee Table Styling */
+.employee-table {
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px solid #4a5a6a; /* Solid border similar to the dropzone's color */
+    border-radius: 8px;
+    background-color: transparent; /* Fully transparent background */
+    box-shadow: none; /* No overall shadow for the table */
+}
+
+.employee-table h3 {
+    color: white; /* White color for "Employee List" heading */
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.6); /* Soft centered shadow around the heading text */
+}
+
+/* Table Styling */
+.employee-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: transparent; /* Transparent background for the table */
+}
+
+.employee-table th,
+.employee-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #4a5a6a; /* Darker border for better separation */
+    color: white; /* White text for contrast */
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.6); /* Centered shadow around each letter for readability */
+}
+
+.employee-table th {
+    background-color: transparent; /* Transparent background for header cells */
+    font-weight: 600;
+}
+
+.employee-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Highlight rows with a subtle transparent color */
+}

@@ -1,4 +1,4 @@
-import httpClientE from '../http-common-employee'
+import httpClientE from './http-common-employee'
 
 const getAll = () => {
    return httpClientE.get('/load-all')

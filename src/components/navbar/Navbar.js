@@ -11,7 +11,7 @@ export default function Navbar() {
       <CustomLinkTitle className="site-title" to="/haiku">haiku-secret</CustomLinkTitle>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <ul>
-          {/* <CustomLink to="/upload">csv-uploader</CustomLink> */}
+          <CustomLink to="/upload">csv-uploader</CustomLink>
           <CustomLink to="/">about</CustomLink>
           <CustomLink to="/login">{isLoggedIn ? ("🔑 " + username) : "🔑 login"}</CustomLink>
         </ul>
