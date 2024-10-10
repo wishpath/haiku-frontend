@@ -1,4 +1,4 @@
-import httpClientU from './http-common-upload'
+import httpClientU from './HttpCommonUpload'
 
 const upload = data => {
     return httpClientU.put('/', data);
