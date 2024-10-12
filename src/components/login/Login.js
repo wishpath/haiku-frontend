@@ -1,11 +1,14 @@
-// src/components/Login.js
-// React component might be used under the hood.
-// Curly braces are used when the name is strict, otherwise could be renamed
-import React, { useState } from 'react';
+// src/components/login/Login.js
+
+
+
+import 
+  React, // React component might be used under the hood.
+  { useState } // Curly braces are used when the name is strict, otherwise could be renamed
+  from 'react';
 import { useLogin } from '../../context/LoginContext';
 
 const Login = () => {
-
   // how login is accessed:
   // LoginContext.js -> useContext(createContext()) -> useLogin() -> ... REACT MAGIC! ... -> LoginContext.Provider value -> login
   const { login } = useLogin(); 
@@ -14,7 +17,7 @@ const Login = () => {
   // event object
   const handleLogin = (e) => {
     e.preventDefault(); // Prevents the form from submitting
-    login(inputUsername); // Call login with the username
+    login(inputUsername); // Call LoginContext.login() to set username
     setInputUsername(''); // Clear the input
   };
 

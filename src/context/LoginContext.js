@@ -8,7 +8,7 @@ import React, { createContext, useContext, useState } from 'react';
 const LoginContext = createContext();
 
 //defines a custom hook that allows components to access the LoginContext values easily
-//somehow through useLogin a function 'login' (withing LoginPorvider) is accessed like: "const { login } = useLogin();"
+//somehow through useLogin a function 'login' (within LoginPorvider) is accessed like: "const { login } = useLogin();"
 //how? magic. `useContext()` uses Ract magic to access `LoginProvider`.
 export const useLogin = () => useContext(LoginContext);
 
