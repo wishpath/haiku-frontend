@@ -16,3 +16,27 @@ handle empty secret messages like ąčęūėųšęč9ėūąųčę
 
 
 atsiradęs error nenukrenta: "500" po "e" klaidos
+
+
+
+
+considering google oauth:
+
+    npm install gapi-script react-google-login
+    my react 18 is too much ahead for this
+
+    chatGPT offered different library
+    npm install @react-oauth/google
+
+    or downgrade react:
+    npm install react@17 react-dom@17
+
+    i do downgrade react, then: 
+    npm install gapi-script react-google-login --legacy-peer-deps
+    (--legacy-peer-deps flag to bypass any strict dependency checks and install these libraries anyway)
+
+    got conflict so "delete the node_modules folder and the package-lock.json file, and then reinstall all dependencies:"
+rm -rf node_modules package-lock.json
+npm cache clean --force
+npm install
+
