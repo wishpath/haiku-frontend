@@ -40,8 +40,9 @@ const OldLogin = () => {
     e.preventDefault(); // Prevents the form from submitting
     login(inputUsername); // Call LoginContext.login() to set username
     setInputUsername(''); // Clear the input
-  };
+  }; 
 
+  
   return (
     //onSubmit attribute is a shorthand provided by React, so <form onSubmit={handleLogin(onSubmit)}> in't needed
     //If you use <form onSubmit={handleLogin(onSubmit)}>, it will not prevent the default form submission
