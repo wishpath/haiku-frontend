@@ -64,7 +64,7 @@ const OldLogin = () => {
       <br></br>
       <LogoutButton/>
     </>
-  );
+  );   
 };
 
 export default OldLogin;
