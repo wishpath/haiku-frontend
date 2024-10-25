@@ -13,6 +13,30 @@ import { gapi } from 'gapi-script';
 const clientId = process.env.REACT_APP_OATH_CLIENT_ID;
 
 const OldLogin = () => {
+  function handleCallbackResponse(response) {
+
+  }
+
+  useEffect(
+    //the first parameter is the effect itself that we want to run - function
+    () => {
+      //defined in the script in index.html
+      /* global google */
+      google.accounts.id.initialize({
+        client_id: clientId,
+        callback: handleCallbackResponse//if someone ever logs in, tell what function do we want to call
+      });
+
+      google.accounts.id.renderButton(
+        document.getElementById("signInDiv")
+      )
+    },
+    //the second parameter, if anything in this array changes - it's going to run use effect again
+    //but we only want to run this effect once, so we put an empty array
+    [] 
+  ) 
+
+
   console.log('OldLogin, clientId:', clientId);
   //initialise a client
   //supposed to run when our app runs
