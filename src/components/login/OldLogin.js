@@ -13,11 +13,12 @@ import { gapi } from 'gapi-script';
 const clientId = process.env.REACT_APP_OATH_CLIENT_ID;
 
 const OldLogin = () => {
-  function handleCallbackResponse(response) {
-
+  function handleCallbackResponse(response) { //access to the response when anyone tries to login, this response comes from google didentity services
+    console.log("encoded JWT (JSON Web Token) token for authorisation: " + response.credential);
   }
 
   useEffect(
+
     //the first parameter is the effect itself that we want to run - function
     () => {
       //defined in the script in index.html
@@ -28,9 +29,12 @@ const OldLogin = () => {
       });
 
       google.accounts.id.renderButton(
-        document.getElementById("signInDiv")
+        document.getElementById("signInDiv"),
+        {theme: "outline", size: "large"}
       )
     },
+
+
     //the second parameter, if anything in this array changes - it's going to run use effect again
     //but we only want to run this effect once, so we put an empty array
     [] 
@@ -83,10 +87,13 @@ const OldLogin = () => {
         />
         <button type="submit">{"Login" + (inputUsername ? (" as " + inputUsername) : "") }</button>
       </form>
+      
       <br></br>
       <LoginButton/>
       <br></br>
       <LogoutButton/>
+      <br></br>
+      <div id="signInDiv"></div>
     </>
   );   
 };

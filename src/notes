@@ -43,3 +43,8 @@ npm install
 
 alias that would check if today ive got a green square on git
  
+number of haiku dictionary words for binary conversion
+ 111111111111 - 4095
+ 11111111111 - 2047
+ number of letters to be interpreted
+ 11111 - 31
