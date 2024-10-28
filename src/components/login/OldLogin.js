@@ -6,8 +6,6 @@ import
   { useState } // Curly braces are used when the name is strict, otherwise could be renamed
   from 'react';
 import { useLogin } from '../../context/LoginContext';
-import LoginButton from './Login';
-import LogoutButton from './Logout';
 import { useEffect } from 'react';
 import { gapi } from 'gapi-script';
 const clientId = process.env.REACT_APP_OATH_CLIENT_ID;
@@ -88,10 +86,6 @@ const OldLogin = () => {
         <button type="submit">{"Login" + (inputUsername ? (" as " + inputUsername) : "") }</button>
       </form>
       
-      <br></br>
-      <LoginButton/>
-      <br></br>
-      <LogoutButton/>
       <br></br>
       <div id="signInDiv"></div>
     </>
