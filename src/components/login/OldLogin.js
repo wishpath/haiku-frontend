@@ -8,11 +8,17 @@ import
 import { useLogin } from '../../context/LoginContext';
 import { useEffect } from 'react';
 import { gapi } from 'gapi-script';
+import { jwtDecode } from 'jwt-decode'; //function to decode jwt - jason web tokens
 const clientId = process.env.REACT_APP_OATH_CLIENT_ID;
 
 const OldLogin = () => {
+  const [user, setUser] = useState({})
+
   function handleCallbackResponse(response) { //access to the response when anyone tries to login, this response comes from google didentity services
     console.log("encoded JWT (JSON Web Token) token for authorisation: " + response.credential);
+    var userObject = jwtDecode(response.credential);
+    console.log(userObject);
+    setUser(userObject);
   }
 
   useEffect(
@@ -88,6 +94,13 @@ const OldLogin = () => {
       
       <br></br>
       <div id="signInDiv"></div>
+      { user &&
+        <div>
+          <img src={user.picture}></img>
+          <h3>{user.name}</h3>
+        </div>
+
+      }
     </>
   );   
 };
