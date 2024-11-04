@@ -1,107 +1,53 @@
 // src/components/login/OldLogin.js
-
-
-import 
-  React, // React component might be used under the hood.
-  { useState } // Curly braces are used when the name is strict, otherwise could be renamed
-  from 'react';
-import { useLogin } from '../../context/LoginContext';
+import React from 'react'; // React component might be used under the hood.
+import { useLoginContext } from '../../context/LoginContext'; // Curly braces are used when the name is strict, otherwise could be renamed
 import { useEffect } from 'react';
-import { gapi } from 'gapi-script';
 import { jwtDecode } from 'jwt-decode'; //function to decode jwt - jason web tokens
-const clientId = process.env.REACT_APP_OATH_CLIENT_ID;
 
 const OldLogin = () => {
-  const [user, setUser] = useState({})
 
-  function handleCallbackResponse(response) { //access to the response when anyone tries to login, this response comes from google didentity services
-    console.log("encoded JWT (JSON Web Token) token for authorisation: " + response.credential);
-    var userObject = jwtDecode(response.credential);
-    console.log(userObject);
-    setUser(userObject);
+  // how login is accessed:
+  // LoginContext.js -> useContext(createContext()) -> useLoginContext() -> ... REACT MAGIC! ... -> LoginContext.Provider value -> login
+  const { callLoginFromContext, callLogoutFromContext } = useLoginContext(); 
+
+  function whenSoemoneTriesToLogInWithGoogle(response) { //response comes from google identity services
+    var returnedEncodedUserObject = response.credential;
+    var userObject = jwtDecode(returnedEncodedUserObject);
+    callLoginFromContext(userObject);
+    document.getElementById("signInDiv").hidden = true;
+    document.getElementById("signOutDiv").hidden = false;
   }
 
-  useEffect(
+  function googleLogOut(event) {
+    callLogoutFromContext();
+    document.getElementById("signInDiv").hidden = false;
+    document.getElementById("signOutDiv").hidden = true;
+  }
 
+  
+  useEffect(
     //the first parameter is the effect itself that we want to run - function
     () => {
-      //defined in the script in index.html
-      /* global google */
+      /* global google */ //this comment has to be here, dont remove. defined in index.html as script http://accounts.google.com/gsi/client
       google.accounts.id.initialize({
-        client_id: clientId,
-        callback: handleCallbackResponse//if someone ever logs in, tell what function do we want to call
+        client_id: process.env.REACT_APP_OATH_CLIENT_ID, // == System.getEnv(REACT_APP_OATH_CLIENT_ID) // this is my authentication for google api
+        callback: whenSoemoneTriesToLogInWithGoogle
       });
-
       google.accounts.id.renderButton(
         document.getElementById("signInDiv"),
         {theme: "outline", size: "large"}
-      )
+      );
+      google.accounts.id.prompt(); //one tap dialog - quicker login
     },
-
-
     //the second parameter, if anything in this array changes - it's going to run use effect again
-    //but we only want to run this effect once, so we put an empty array
+    //but we only want to run this effect once, so we put an empty array  
     [] 
   ) 
-
-
-  console.log('OldLogin, clientId:', clientId);
-  //initialise a client
-  //supposed to run when our app runs
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "" //gonna be different if i'm actually using different api's
-      })
-    };
-
-    gapi.load('client.auth2', start)
-  })
-
-  //var accessToken = gapi.auth.getToken().accessToken;
-
-  
-  // how login is accessed:
-  // LoginContext.js -> useContext(createContext()) -> useLogin() -> ... REACT MAGIC! ... -> LoginContext.Provider value -> login
-  const { login } = useLogin(); 
-  const [inputUsername, setInputUsername] = useState('');
-
-  // event object
-  const handleLogin = (e) => {
-    e.preventDefault(); // Prevents the form from submitting
-    login(inputUsername); // Call LoginContext.login() to set username
-    setInputUsername(''); // Clear the input
-  }; 
-
   
   return (
-    //onSubmit attribute is a shorthand provided by React, so <form onSubmit={handleLogin(onSubmit)}> in't needed
-    //If you use <form onSubmit={handleLogin(onSubmit)}>, it will not prevent the default form submission
-    //handleLogin(onSubmit) would be excuted during render phase
-    <>
-      <form onSubmit={handleLogin}>
-        <input 
-          type="text"
-          //will display whatever is in the variable "imputUsername"
-          value={inputUsername}
-          //after adding a letter, whatever is displayed will be stored in the variable "imputUsername"
-          onChange={(e) => setInputUsername(e.target.value)}
-          placeholder="Enter username" 
-        />
-        <button type="submit">{"Login" + (inputUsername ? (" as " + inputUsername) : "") }</button>
-      </form>
-      
-      <br></br>
+    <>     
       <div id="signInDiv"></div>
-      { user &&
-        <div>
-          <img src={user.picture}></img>
-          <h3>{user.name}</h3>
-        </div>
-
-      }
-      
+      <button id="signOutDiv" hidden='true' onClick = {(e) => googleLogOut(e)}>Log out</button>    
     </>
   );   
 };

@@ -5,11 +5,11 @@ import {
   useMatch, // checks if the user-entered URL matches a route pattern specified by developers in the project.
   useResolvedPath // resolves a relative path to a full path (excluding the domain).
 } from "react-router-dom"; //React Router directs user requests to specific views without refreshing.
-import { useLogin } from "../../context/LoginContext";
+import { useLoginContext } from "../../context/LoginContext";
 import './tool/Navbar.css';
 
 export default function Navbar() {
-  const { username, isLoggedIn } = useLogin(); // Use context to get username and login state
+  const { userObject, isLoggedIn } = useLoginContext(); // Use context to get username and login state
 
   return (
     <nav className="nav">
@@ -18,7 +18,7 @@ export default function Navbar() {
         <ul>
           <CustomLink to="/upload" id="uniqueUploadId">csv-uploader</CustomLink>
           <CustomLink to="/">about</CustomLink>
-          <CustomLink to="/login">{isLoggedIn ? ("🔑 " + username) : "🔑 login"}</CustomLink>
+          <CustomLink to="/login">{isLoggedIn ? ("🔑 " + userObject.name) : "🔑 login"}</CustomLink>
         </ul>
       </div>
     </nav>
