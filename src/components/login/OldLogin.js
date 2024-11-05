@@ -24,7 +24,7 @@ const OldLogin = () => {
     document.getElementById("signOutDiv").hidden = true;
   }
 
-  
+   
   useEffect(
     //the first parameter is the effect itself that we want to run - function
     () => {
