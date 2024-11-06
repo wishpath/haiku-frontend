@@ -5,7 +5,7 @@ import NotFound from "../components/notfound/NotFound";
 import Upload from "../components/csvupload/CSVUpload";
 import About from "../components/about/About";
 import Haiku from "../components/haiku/Haiku";
-import OldLogin from "../components/login/OldLogin";
+import LoginPage from "../components/login/LoginPage";
 import {Routes, Route} from "react-router-dom";
 import { LoginProvider } from '../context/LoginContext';
 
@@ -20,7 +20,7 @@ function App(){
           <Route path="*" element={<NotFound />} />
           <Route path="/haiku" element={<Haiku />} />
           <Route path="/upload" element={<Upload />} />
-          <Route path="/login" element={<OldLogin />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={<About />} />
         </Routes>
       </div>

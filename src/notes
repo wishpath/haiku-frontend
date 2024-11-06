@@ -1,3 +1,6 @@
+display: flex arba none depending of contex isSignedIn
+
+
 login page design
 after login, instead of key, use userObject.picture
 
