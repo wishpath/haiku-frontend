@@ -1,10 +1,11 @@
-// src/components/login/OldLogin.js
+// src/components/login/LoginPage.js
 import React from 'react'; // React component might be used under the hood.
 import { useLoginContext } from '../../context/LoginContext'; // Curly braces are used when the name is strict, otherwise could be renamed
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode'; //function to decode jwt - jason web tokens
+import './tool/LoginPage.css';
 
-const OldLogin = () => {
+const LoginPage = () => {
 
   // how login is accessed:
   // LoginContext.js -> useContext(createContext()) -> useLoginContext() -> ... REACT MAGIC! ... -> LoginContext.Provider value -> login
@@ -14,14 +15,16 @@ const OldLogin = () => {
     var returnedEncodedUserObject = response.credential;
     var userObject = jwtDecode(returnedEncodedUserObject);
     callLoginFromContext(userObject);
-    document.getElementById("signInDiv").hidden = true;
-    document.getElementById("signOutDiv").hidden = false;
+    document.getElementById("LogInDiv").style.display = 'none';
+    document.getElementById("LogOutDiv").hidden = false;
+    document.getElementById("LogOutButton").hidden = false;
   }
 
   function googleLogOut(event) {
     callLogoutFromContext();
-    document.getElementById("signInDiv").hidden = false;
-    document.getElementById("signOutDiv").hidden = true;
+    document.getElementById("LogInDiv").style.display = 'flex';
+    document.getElementById("LogOutDiv").hidden = true;
+    document.getElementById("LogOutButton").hidden = true;
   }
 
    
@@ -34,7 +37,7 @@ const OldLogin = () => {
         callback: whenSoemoneTriesToLogInWithGoogle
       });
       google.accounts.id.renderButton(
-        document.getElementById("signInDiv"),
+        document.getElementById("LogInDiv"),
         {theme: "outline", size: "large"}
       );
       google.accounts.id.prompt(); //one tap dialog - quicker login
@@ -46,10 +49,13 @@ const OldLogin = () => {
   
   return (
     <>     
-      <div id="signInDiv"></div>
-      <button id="signOutDiv" hidden='true' onClick = {(e) => googleLogOut(e)}>Log out</button>    
+      <div id="LogInDiv"></div>
+      <div id="LogOutDiv">
+        <button id="LogOutButton" hidden='true' onClick = {(e) => googleLogOut(e)}>Log out</button>   
+      </div>
+       
     </>
   );   
 };
 
-export default OldLogin;
+export default LoginPage;

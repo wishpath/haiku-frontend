@@ -1,0 +1,36 @@
+
+#LogOutDiv {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: flex-start; /* Align to the top */
+    height: 100vh; /* Full viewport height */
+    padding-top: 20px;
+}
+
+#LogInDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.0);
+}
+
+#LogInDiv button {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#LogOutButton {
+    background-color: white;
+    color: #3a506b; 
+    padding: 10px 20px;
+    border: 1px solid white;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#LogOutButton:hover {
+    background-color: #f5f9fc;
+    border: 1px solid #e6f4ff;
+}
