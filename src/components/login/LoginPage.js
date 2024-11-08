@@ -10,13 +10,12 @@ const LoginPage = () => {
   // how login is accessed:
   // LoginContext.js -> useContext(createContext()) -> useLoginContext() -> ... REACT MAGIC! ... -> LoginContext.Provider value -> login
   const { isLoggedIn, callLoginFromContext, callLogoutFromContext } = useLoginContext();
-  const {localLogIn, setLocalLogin} = useState(isLoggedIn);
+
 
   function whenSoemoneTriesToLogInWithGoogle(response) { //response comes from google identity services
     var returnedEncodedUserObject = response.credential;
     var userObject = jwtDecode(returnedEncodedUserObject);
     callLoginFromContext(userObject);
-    setLocalLogin(true);
     document.getElementById("LogInDiv").style.display = 'none';
     document.getElementById("LogOutDiv").hidden = false;
     document.getElementById("LogOutButton").hidden = false;
@@ -48,8 +47,8 @@ const LoginPage = () => {
       );
       google.accounts.id.prompt(); //one tap dialog - quicker login
       document.getElementById("LogInDiv").style.display = isLoggedIn ? 'none' : 'flex';
-      document.getElementById("LogOutDiv").hidden = isLoggedIn;
-      document.getElementById("LogOutButton").hidden = isLoggedIn;
+      document.getElementById("LogOutDiv").hidden = !isLoggedIn;
+      document.getElementById("LogOutButton").hidden = !isLoggedIn;
     },
     //the second parameter, if anything in this array changes - it's going to run use effect again
     //but we only want to run this effect once, so we put an empty array  
@@ -58,13 +57,10 @@ const LoginPage = () => {
   
   return (
     <>     
-   
-        <div id="LogOutDiv">
-          <button id="LogOutButton" hide='true' onClick = {(e) => googleLogOut(e)}>Log out</button>   
-        </div>
-        
-        <div id="LogInDiv"></div> 
-      
+      <div id="LogInDiv"></div> 
+      <div id="LogOutDiv">
+        <button id="LogOutButton" onClick = {(e) => googleLogOut(e)}>Log out</button>   
+      </div>
     </>
   );   
 };
