@@ -19,11 +19,13 @@ export const LoginProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const callLoginFromContext = (userObject) => {
+    console.log("logged in");
     setUserObject(userObject);
     setIsLoggedIn(true);
   };
 
   const callLogoutFromContext = () => {
+    console.log("logged out");
     setUserObject('');
     setIsLoggedIn(false);
   };

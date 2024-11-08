@@ -16,9 +16,22 @@ export default function Navbar() {
       <CustomLinkTitle className="site-title" to="/haiku">haiku-secret</CustomLinkTitle>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <ul>
-          <CustomLink to="/upload" id="uniqueUploadId">csv-uploader</CustomLink>
+          {/* <CustomLink to="/upload" id="uniqueUploadId">csv-uploader</CustomLink> */}
           <CustomLink to="/">about</CustomLink>
-          <CustomLink to="/login">{isLoggedIn ? ("🔑 " + userObject.name) : "🔑 login"}</CustomLink>
+          <CustomLink to="/login">
+            {isLoggedIn ? (
+              <>
+                <img 
+                  src={userObject.picture} 
+                  alt="User" 
+                  style={{ width: '21px', height: '21px', borderRadius: '50%', marginRight: '8px' }} 
+                />
+                {userObject.name}
+              </>
+            ) : (
+              "🔑 login"
+            )}
+          </CustomLink>
         </ul>
       </div>
     </nav>
