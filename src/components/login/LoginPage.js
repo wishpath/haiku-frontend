@@ -11,10 +11,32 @@ const LoginPage = () => {
   // LoginContext.js -> useContext(createContext()) -> useLoginContext() -> ... REACT MAGIC! ... -> LoginContext.Provider value -> login
   const { isLoggedIn, callLoginFromContext, callLogoutFromContext } = useLoginContext();
 
+  function decodeEncodedUserObject(returnedEncodedUserObject) {
+    try {
+      return jwtDecode(returnedEncodedUserObject);
+    } catch (error) {
+        console.error("Invalid JWT format:", error);
+        return null;
+    }
+  }
 
-  function whenSoemoneTriesToLogInWithGoogle(response) { //response comes from google identity services
+  function returnedCredentialIsValid(userObject) {
+    const clientId = process.env.REACT_APP_OATH_CLIENT_ID;
+    if (userObject.aud !== clientId) return false; // Check if audience (aud) matches the app's client ID
+    const currentTime = Math.floor(Date.now() / 1000); 
+    if (!userObject.exp || userObject.exp < currentTime) return false; // Check if token has expired
+    if (!userObject.email_verified) return false; // check if the email is verified
+    return true;
+  }
+
+
+  function whenSomeoneTriesToLogInWithGoogle(response) { //response comes from google identity services
     var returnedEncodedUserObject = response.credential;
-    var userObject = jwtDecode(returnedEncodedUserObject);
+    if (!returnedEncodedUserObject) return; //missing credential
+    var userObject = decodeEncodedUserObject(returnedEncodedUserObject);
+    if (!userObject) return; //invalid JWT (JSON web token) format
+    if (!returnedCredentialIsValid(userObject)) return;
+    console.log(userObject); //should not go to prod!!!
     callLoginFromContext(userObject);
     document.getElementById("LogInDiv").style.display = 'none';
     document.getElementById("LogOutDiv").hidden = false;
@@ -32,20 +54,16 @@ const LoginPage = () => {
   useEffect(
     //the first parameter is the effect itself that we want to run - function
     () => {
-      // if (isLoggedIn) {
-      //   console.log("User is already logged in. Skipping Google login initialization.");
-      //   return;
-      // }
       /* global google */ //this comment has to be here, dont remove. defined in index.html as script http://accounts.google.com/gsi/client
       google.accounts.id.initialize({
         client_id: process.env.REACT_APP_OATH_CLIENT_ID, // == System.getEnv(REACT_APP_OATH_CLIENT_ID) // this is my authentication for google api
-        callback: whenSoemoneTriesToLogInWithGoogle
+        callback: whenSomeoneTriesToLogInWithGoogle
       });
       google.accounts.id.renderButton(
         document.getElementById("LogInDiv"),
         {theme: "outline", size: "large"}
       );
-      google.accounts.id.prompt(); //one tap dialog - quicker login
+      if (!isLoggedIn) google.accounts.id.prompt(); //one tap dialog - quicker login
       document.getElementById("LogInDiv").style.display = isLoggedIn ? 'none' : 'flex';
       document.getElementById("LogOutDiv").hidden = !isLoggedIn;
       document.getElementById("LogOutButton").hidden = !isLoggedIn;

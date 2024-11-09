@@ -1,8 +1,4 @@
-display: flex arba none depending of contex isSignedIn
-
-
-login page design 
-after login, instead of key, use userObject.picture
+mess with hights in navbar when clicking on links
 
 
 display could use calligraphy(sort of like shodo) of the the main word (general topic or mood of the poem)
