@@ -26,7 +26,7 @@ export default function Navbar() {
                   alt="User" 
                   style={{ width: '21px', height: '21px', borderRadius: '50%', marginRight: '8px' }} 
                 />
-                {userObject.name}
+                {userObject.given_name}
               </>
             ) : (
               "🔑 login"
