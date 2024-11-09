@@ -1,4 +1,24 @@
+place userObject JWT to cookies and before anything read it from there
+
+
 mess with hights in navbar when clicking on links
+
+
+simplify:
+          <CustomLink to="/login">
+            {isLoggedIn ? (
+              <>
+                <img 
+                  src={userObject.picture} 
+                  alt="User" 
+                  style={{ width: '21px', height: '21px', borderRadius: '50%', marginRight: '8px' }} 
+                />
+                {userObject.given_name}
+              </>
+            ) : (
+              "🔑 login"
+            )}
+          </CustomLink>
 
 
 display could use calligraphy(sort of like shodo) of the the main word (general topic or mood of the poem)
