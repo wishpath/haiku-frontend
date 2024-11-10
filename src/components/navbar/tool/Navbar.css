@@ -42,3 +42,10 @@
 .active a {
   border-bottom: 2px solid white; /* Highlight active link */
 }
+
+#user-picture {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
