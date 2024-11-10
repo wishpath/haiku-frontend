@@ -19,18 +19,7 @@ export default function Navbar() {
           {/* <CustomLink to="/upload" id="uniqueUploadId">csv-uploader</CustomLink> */}
           <CustomLink to="/">about</CustomLink>
           <CustomLink to="/login">
-            {isLoggedIn ? (
-              <>
-                <img 
-                  src={userObject.picture} 
-                  alt="User" 
-                  style={{ width: '21px', height: '21px', borderRadius: '50%', marginRight: '8px' }} 
-                />
-                {userObject.given_name}
-              </>
-            ) : (
-              "🔑 login"
-            )}
+            {isLoggedIn ? <UserPictureAndName userObject={userObject}/> : "🔑 login"}
           </CustomLink>
         </ul>
       </div>
@@ -71,5 +60,15 @@ function CustomLinkTitle({ to, children, ...props }) {
         {children}
       </Link>
     </a>
+  );
+}
+
+
+function UserPictureAndName({userObject}){
+  return (
+    <>
+      <img id="user-picture" src={userObject.picture}/>
+      {userObject.given_name}
+    </>
   );
 }
