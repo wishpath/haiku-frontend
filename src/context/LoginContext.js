@@ -1,5 +1,5 @@
 // src/context/LoginContext.js
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 //creates context Object. This object has two components: Provider and Consumer
 //Provider provides way to share State
@@ -18,16 +18,36 @@ export const LoginProvider = ({ children }) => {
   const [userObject, setUserObject] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    const savedToken = localStorage.getItem('token');
+    if (savedUser && savedToken) {
+      const parsedUser = JSON.parse(savedUser);
+      if (parsedUser && parsedUser.exp > Math.floor(Date.now() / 1000)) { //!! create my own JWT validator!!!
+        console.log("logged in (from local storage)");
+        setUserObject(parsedUser);
+        setIsLoggedIn(true);
+      } else {
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+      }
+    }
+  }, []);
+
   const callLoginFromContext = (userObject) => {
-    console.log("logged in");
+    console.log("logged in (callLoginFromContext)");
     setUserObject(userObject);
     setIsLoggedIn(true);
+    localStorage.setItem('user', JSON.stringify(userObject));
+    localStorage.setItem('token', userObject.token);  // Store token for verification or API calls
   };
 
   const callLogoutFromContext = () => {
     console.log("logged out");
     setUserObject('');
     setIsLoggedIn(false);
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
   };
 
   return (

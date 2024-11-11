@@ -32,7 +32,6 @@ function CustomLink({
   to, //triggered relatve path
   children, // visual content of the CustomLink, e.g., "csv-uploader" for to="/upload".
   ...props }) { //atributes of CustomLink, e.g. id="uniqueUploadId"
-
   
   const resolvedPath = useResolvedPath(to); //only the path component of the URL, not with the domain or protocol.
   const isActive = useMatch({ path: resolvedPath.pathname, end: true }); // checks if the user-entered or trigered (by link) url matches the resolved path.
@@ -62,7 +61,6 @@ function CustomLinkTitle({ to, children, ...props }) {
     </a>
   );
 }
-
 
 function UserPictureAndName({userObject}){
   return (

@@ -1,21 +1,10 @@
+//!! create my own JWT validator!!!
+
+normal login should turn off one tap log in at some point
+
 place userObject JWT to cookies and before anything read it from there
 
-
 mess with hights in navbar when clicking on links
-
-
-display could use calligraphy(sort of like shodo) of the the main word (general topic or mood of the poem)
-    this could be animated or static
-
-display of poem could be animated 
-    by revealing portions of it 
-        with a typewriter efect, 
-        and AI narrator 
-
-should be white elements on some cool background (perfect loop dark colored video)
-
-🕵️‍♂️ encrypt like a spy 📜 write like a poet.
-
 
 handle e in the front of secret eeeeeees or e  or eeeeeeee
 handle empty secret messages like ąčęūėųšęč9ėūąųčę
@@ -23,34 +12,25 @@ handle empty secret messages like ąčęūėųšęč9ėūąųčę
 
 atsiradęs error nenukrenta: "500" po "e" klaidos
 
-
-
-
-considering google oauth:
-
-    npm install gapi-script react-google-login
-    my react 18 is too much ahead for this
-
-    chatGPT offered different library
-    npm install @react-oauth/google
-
-    or downgrade react:
-    npm install react@17 react-dom@17
-
-    i do downgrade react, then: 
-    npm install gapi-script react-google-login --legacy-peer-deps
-    (--legacy-peer-deps flag to bypass any strict dependency checks and install these libraries anyway)
-
-    got conflict so "delete the node_modules folder and the package-lock.json file, and then reinstall all dependencies:"
-rm -rf node_modules package-lock.json
-npm cache clean --force
-npm install
-
-
-alias that would check if today ive got a green square on git
- 
 number of haiku dictionary words for binary conversion
  111111111111 - 4095
  11111111111 - 2047
  number of letters to be interpreted
  11111 - 31
+
+
+**display could use calligraphy(sort of like shodo) of the the main word (general topic or mood of the poem)
+    this could be animated or static
+
+**display of poem could be animated 
+    by revealing portions of it 
+        with a typewriter efect, 
+        and AI narrator 
+
+**should be white elements on some cool background (perfect loop dark colored video)
+
+****🕵️‍♂️ encrypt like a spy 📜 write like a poet.
+
+
+******alias that would check if today ive got a green square on git
+ 
