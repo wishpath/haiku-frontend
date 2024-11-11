@@ -69,6 +69,12 @@ const LoginPage = () => {
   useEffect(
     //the first parameter is the effect itself that we want to run - function
     () => {
+      if (isLoggedIn) {
+        document.getElementById("LogInDiv").style.display = 'none';
+        document.getElementById("LogOutDiv").hidden = false;
+        return;
+      }
+      
       /* global google */ //this comment has to be here, dont remove. defined in index.html as script http://accounts.google.com/gsi/client
       google.accounts.id.initialize({
         client_id: process.env.REACT_APP_OATH_CLIENT_ID, // == System.getEnv(REACT_APP_OATH_CLIENT_ID) // this is my authentication for google api
