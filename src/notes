@@ -1,4 +1,6 @@
 //!! create my own JWT validator!!!
+//token	undefined !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// how to make login token safe from tampering?
 
 normal login should turn off one tap log in at some point
 

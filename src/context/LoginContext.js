@@ -39,7 +39,7 @@ export const LoginProvider = ({ children }) => {
     setUserObject(userObject);
     setIsLoggedIn(true);
     localStorage.setItem('user', JSON.stringify(userObject));
-    localStorage.setItem('token', userObject.token);  // Store token for verification or API calls
+    localStorage.setItem('token', userObject.token);  // token	undefined !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   };
 
   const callLogoutFromContext = () => {
