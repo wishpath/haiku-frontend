@@ -18,43 +18,48 @@ export const LoginProvider = ({ children }) => {
   const [userObject, setUserObject] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const savedUser = localStorage.getItem('user');
+  const checkSavedTokenForContext = () => {
     const savedToken = localStorage.getItem('token');
-    if (savedUser && savedToken) {
-      const parsedUser = JSON.parse(savedUser);
-      if (parsedUser && parsedUser.exp > Math.floor(Date.now() / 1000)) { //!! create my own JWT validator!!!
+    if (savedToken) {
+      const parsedToken = JSON.parse(savedToken);
+      if (parsedToken && parsedToken.exp > Math.floor(Date.now() / 1000)) { //!! create my own JWT validator!!!
         console.log("logged in (from local storage)");
-        setUserObject(parsedUser);
-        setIsLoggedIn(true);
+        callLoginFromContext(parsedToken);
+        return;
       } else {
-        localStorage.removeItem('user');
         localStorage.removeItem('token');
       }
     }
-  }, []);
+  }
 
   const callLoginFromContext = (userObject) => {
-    console.log("logged in (callLoginFromContext)");
     setUserObject(userObject);
     setIsLoggedIn(true);
-    localStorage.setItem('user', JSON.stringify(userObject));
-    localStorage.setItem('token', userObject.token);  // token	undefined !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    localStorage.setItem('token', JSON.stringify(userObject));
   };
 
   const callLogoutFromContext = () => {
     console.log("logged out");
     setUserObject('');
     setIsLoggedIn(false);
-    localStorage.removeItem('user');
     localStorage.removeItem('token');
   };
+
+  useEffect(
+    //the first parameter is the effect itself that we want to run - function
+    () => {
+      if (isLoggedIn) {
+        return;
+      }
+      checkSavedTokenForContext();
+    },[] 
+  )
 
   return (
     //formulates LoginProvider as Component like: <LoginProvider> under only it,  the context will be available in the App.js
     //listing username, isLoggedIn, login, logout that will be available by useLogin hook
     //value prop of the LoginContext.Provider is the one that actually stores username, isLoggedIn, login, logout
-    <LoginContext.Provider value={{ userObject, isLoggedIn, callLoginFromContext, callLogoutFromContext }}>
+    <LoginContext.Provider value={{ userObject, isLoggedIn, callLoginFromContext, callLogoutFromContext, checkSavedTokenForContext }}>
       {/*represents any components nested inside the LoginProvider
       indicating that these child components will have access to the context values provided by the LoginContext.Provider*/}
       {children}

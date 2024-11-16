@@ -63,6 +63,10 @@ const LoginPage = () => {
     document.getElementById("LogInDiv").style.display = 'flex';
     document.getElementById("LogOutDiv").hidden = true;
     document.getElementById("LogOutButton").hidden = true;
+    google.accounts.id.renderButton(
+      document.getElementById("LogInDiv"),
+      {theme: "outline", size: "large"}
+    );
   }
 
    
@@ -75,6 +79,25 @@ const LoginPage = () => {
         return;
       }
       
+
+
+      const savedToken = localStorage.getItem('token');
+      if (savedToken) {
+        const parsedToken = JSON.parse(savedToken);
+        if (parsedToken && parsedToken.exp > Math.floor(Date.now() / 1000)) { //!! create my own JWT validator!!!
+          console.log("logged in (from local storage)");
+          callLoginFromContext(parsedToken);
+          document.getElementById("LogInDiv").style.display = 'none';
+          document.getElementById("LogOutDiv").hidden = false;
+          return;
+        } else {
+          localStorage.removeItem('token');
+        }
+      }
+
+
+
+
       /* global google */ //this comment has to be here, dont remove. defined in index.html as script http://accounts.google.com/gsi/client
       google.accounts.id.initialize({
         client_id: process.env.REACT_APP_OATH_CLIENT_ID, // == System.getEnv(REACT_APP_OATH_CLIENT_ID) // this is my authentication for google api
@@ -84,6 +107,8 @@ const LoginPage = () => {
         document.getElementById("LogInDiv"),
         {theme: "outline", size: "large"}
       );
+
+
       if (!isLoggedIn) google.accounts.id.prompt(); //one tap dialog - quicker login
       document.getElementById("LogInDiv").style.display = isLoggedIn ? 'none' : 'flex';
       document.getElementById("LogOutDiv").hidden = !isLoggedIn;
@@ -92,7 +117,7 @@ const LoginPage = () => {
     //the second parameter, if anything in this array changes - it's going to run use effect again
     //but we only want to run this effect once, so we put an empty array  
     [] 
-  ) 
+  )
   
   return (
     <>     

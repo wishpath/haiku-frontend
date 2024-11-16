@@ -7,6 +7,7 @@ import {
 } from "react-router-dom"; //React Router directs user requests to specific views without refreshing.
 import { useLoginContext } from "../../context/LoginContext";
 import './tool/Navbar.css';
+import { useEffect } from "react";
 
 export default function Navbar() {
   const { userObject, isLoggedIn } = useLoginContext(); // Use context to get username and login state
