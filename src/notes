@@ -1,3 +1,6 @@
+when does useEffect actually work? when i'm loading the element where its used? will it get used when i'm in different page where the element is not used?
+
+
 //!! create my own JWT validator!!!
 //token	undefined !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // how to make login token safe from tampering?
