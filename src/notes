@@ -1,3 +1,5 @@
+patestuoti nepavykusį prisijungimą
+
 when does useEffect actually work? when i'm loading the element where its used? will it get used when i'm in different page where the element is not used?
 
 
@@ -42,3 +44,6 @@ number of haiku dictionary words for binary conversion
 
 ******alias that would check if today ive got a green square on git
  
+
+
+       if (!isLoggedIn) google.accounts.id.prompt(); //one tap dialog - quicker login
