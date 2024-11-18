@@ -29,8 +29,43 @@ export class LoginUtils {
     return true;
   }
 
+  static displayLoginOrLogout(isLoggedIn) {
+    document.getElementById("LogInDiv").style.display = isLoggedIn ? 'none' : 'flex';
+    document.getElementById("LogOutDiv").hidden = !isLoggedIn;
+    document.getElementById("LogOutButton").hidden = !isLoggedIn;
+  }
+  static displayLogoutButton() {
+    document.getElementById("LogInDiv").style.display = 'none';
+    document.getElementById("LogOutDiv").hidden = false;
+    document.getElementById("LogOutButton").hidden = false;
+  }
+  static displayLoginButton() {
+    document.getElementById("LogInDiv").style.display = 'flex';
+    document.getElementById("LogOutDiv").hidden = true;
+    document.getElementById("LogOutButton").hidden = true;
+  }
 
 
+  static initialiseAndRenderLoginButton(whenSomeoneTriesToLogInWithGoogle) {
+    /* global google */ //this comment has to be here, dont remove. defined in index.html as script http://accounts.google.com/gsi/client
+    google.accounts.id.initialize({
+      client_id: process.env.REACT_APP_OATH_CLIENT_ID, // == System.getEnv(REACT_APP_OATH_CLIENT_ID) // this is my authentication for google api
+      callback: whenSomeoneTriesToLogInWithGoogle
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("LogInDiv"),
+      { theme: "outline", size: "large" }
+    );
+  }
 
 
+  static decodeResponse(response) {
+    var returnedEncodedUserObject = response.credential;
+    if (!returnedEncodedUserObject) {
+      console.log("missing credential");
+      return; 
+    }
+    var userObject = LoginUtils.decodeEncodedUserObject(returnedEncodedUserObject);
+    return userObject;
+  }
 }
