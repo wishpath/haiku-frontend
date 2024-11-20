@@ -60,12 +60,20 @@ export class LoginUtils {
 
 
   static decodeResponse(response) {
+    if (!response) {
+        console.error("response is null");
+        return null;
+    }
     var returnedEncodedUserObject = response.credential;
     if (!returnedEncodedUserObject) {
-      console.log("missing credential");
-      return; 
+        console.error("missing credential");
+        return null;
     }
     var userObject = LoginUtils.decodeEncodedUserObject(returnedEncodedUserObject);
+    if (!userObject) {
+        console.error("invalid JWT (JSON web token) format");
+        return null;
+    }
     return userObject;
   }
 }
