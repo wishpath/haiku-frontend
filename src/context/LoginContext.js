@@ -1,5 +1,6 @@
 // src/context/LoginContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { LoginUtils } from './../components/login/tool/LoginUtils';
 
 //creates context Object. This object has two components: Provider and Consumer
 //Provider provides way to share State
@@ -22,15 +23,15 @@ export const LoginProvider = ({ children }) => {
     const savedToken = localStorage.getItem('token');
     if (savedToken) {
       const parsedToken = JSON.parse(savedToken);
-      if (parsedToken && parsedToken.exp > Math.floor(Date.now() / 1000)) { //!! create my own JWT validator!!!
+      if (parsedToken && LoginUtils.credentialIsValid(parsedToken)) {
         console.log("logged in (from local storage)");
         callLoginFromContext(parsedToken);
-        return;
       } else {
         localStorage.removeItem('token');
       }
     }
   }
+  
 
   const callLoginFromContext = (userObject) => {
     setUserObject(userObject);
@@ -46,8 +47,7 @@ export const LoginProvider = ({ children }) => {
   };
 
   useEffect(
-    //the first parameter is the effect itself that we want to run - function
-    () => {
+    () => { //the first parameter is the effect itself that we want to run - function
       if (isLoggedIn) {
         return;
       }

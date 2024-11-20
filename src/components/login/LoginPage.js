@@ -6,29 +6,19 @@ import './tool/LoginPage.css';
 import { LoginUtils } from './tool/LoginUtils';
 
 const LoginPage = () => {
-
   // how login is accessed:
   // LoginContext.js -> useContext(createContext()) -> useLoginContext() -> ... REACT MAGIC! ... -> LoginContext.Provider value -> login
   const { isLoggedIn, callLoginFromContext, callLogoutFromContext } = useLoginContext();
 
   function whenSomeoneTriesToLogInWithGoogle(response) { 
-    var returnedEncodedUserObject = response.credential;
-    if (!returnedEncodedUserObject) {
-      console.log("missing credential");
-      return;
+    var userObject = LoginUtils.decodeResponse(response);
+    if (userObject && LoginUtils.credentialIsValid(userObject)) {
+      callLoginFromContext(userObject);
+      LoginUtils.displayLogoutButton();
     }
-    var userObject = LoginUtils.decodeEncodedUserObject(returnedEncodedUserObject);
-    if (!userObject) {
-      console.log("invalid JWT (JSON web token) format");
-      return;
-    }
-    if (!LoginUtils.credentialIsValid(userObject)) return;
-    console.log(userObject); //should not go to prod!!!
-    callLoginFromContext(userObject);
-    LoginUtils.displayLogoutButton();
   }
 
-  function whenSomeoneLogsOut(event) {
+  function whenSomeoneLogsOut() {
     callLogoutFromContext();
     LoginUtils.displayLoginButton();
     LoginUtils.initialiseAndRenderLoginButton(whenSomeoneTriesToLogInWithGoogle);
@@ -40,7 +30,7 @@ const LoginPage = () => {
     //login from saved token
     else if (savedToken = localStorage.getItem('token')) { 
       const parsedToken = JSON.parse(savedToken);
-      if (parsedToken && parsedToken.exp > Math.floor(Date.now() / 1000)) { //!! create my own JWT validator!!!
+      if (parsedToken && LoginUtils.credentialIsValid(parsedToken)) {
         console.log("login from saved token");
         callLoginFromContext(parsedToken);
         LoginUtils.displayLogoutButton();
