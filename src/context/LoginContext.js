@@ -32,7 +32,6 @@ export const LoginProvider = ({ children }) => {
     }
   }
   
-
   const callLoginFromContext = (userObject) => {
     setUserObject(userObject);
     setIsLoggedIn(true);
