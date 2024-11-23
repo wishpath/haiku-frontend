@@ -19,7 +19,6 @@ export const LoginProvider = ({ children }) => {
   const [userObject, setUserObject] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  
   const checkSavedTokenForContext = () => {
     const savedToken = localStorage.getItem('token');
     if (savedToken) {
