@@ -38,6 +38,7 @@ export const LoginProvider = ({ children }) => {
     localStorage.setItem('token', JSON.stringify(userObject));
   };
 
+  
   const callLogoutFromContext = () => {
     console.log("logged out");
     setUserObject('');
