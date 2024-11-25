@@ -24,7 +24,7 @@ export const LoginProvider = ({ children }) => {
     if (savedToken) {
       const parsedToken = JSON.parse(savedToken);
       if (parsedToken && LoginUtils.credentialIsValid(parsedToken)) {
-        console.log("logged in (from local storage)");
+        console.log("logged in from local storage in LoginContext.js");
         callLoginFromContext(parsedToken);
       } else {
         localStorage.removeItem('token');

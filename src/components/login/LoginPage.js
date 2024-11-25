@@ -27,11 +27,12 @@ const LoginPage = () => {
   useEffect(() => {
     let savedToken;
     if (isLoggedIn) LoginUtils.displayLogoutButton();
+
     //login from saved token
     else if (savedToken = localStorage.getItem('token')) { 
       const parsedToken = JSON.parse(savedToken);
       if (parsedToken && LoginUtils.credentialIsValid(parsedToken)) {
-        console.log("login from saved token");
+        console.log("login from saved token in LoginPage.js");
         callLoginFromContext(parsedToken);
         LoginUtils.displayLogoutButton();
         return;
@@ -39,6 +40,7 @@ const LoginPage = () => {
         localStorage.removeItem('token');
       }
     }
+
     //login from google
     else {
       LoginUtils.initialiseAndRenderLoginButton(whenSomeoneTriesToLogInWithGoogle);
