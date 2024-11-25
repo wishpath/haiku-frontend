@@ -1,15 +1,12 @@
+separate sessions for users
+
 patestuoti nepavykusį prisijungimą
 
 when does useEffect actually work? when i'm loading the element where its used? will it get used when i'm in different page where the element is not used?
 
-
-//!! create my own JWT validator!!!
 //token	undefined !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 // how to make login token safe from tampering?
 
-normal login should turn off one tap log in at some point
-
-place userObject JWT to cookies and before anything read it from there
 
 mess with hights in navbar when clicking on links
 
