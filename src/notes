@@ -1,4 +1,7 @@
-separate sessions for users
+send token to backend to identify user and it's ability to access the calculations
+
+separate/isolate sessions for users
+
 
 patestuoti nepavykusį prisijungimą
 
