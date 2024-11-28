@@ -1,9 +1,6 @@
 send token to backend to identify user and it's ability to access the calculations
 
 separate/isolate sessions for users
-
-
-
 patestuoti nepavykusį prisijungimą
 
 when does useEffect actually work? when i'm loading the element where its used? will it get used when i'm in different page where the element is not used?
