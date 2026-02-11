@@ -1,0 +1,25 @@
+TODO:
+  - send token to backend to identify user and it's ability to access the calculations
+  - separate/isolate sessions for users
+  - patestuoti nepavykusį prisijungimą
+  - when does useEffect actually work? when i'm loading the element where its used? will it get used when i'm in different page where the element is not used?
+  - token	undefined !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  - how to make login token safe from tampering?
+  - mess with hights in navbar when clicking on links
+  - handle e in the front of secret eeeeeees or e  or eeeeeeee
+  - handle empty secret messages like ąčęūėųšęč9ėūąųčę
+  - atsiradęs error nenukrenta: "500" po "e" klaidos
+  - number of haiku dictionary words for binary conversion:
+  - 111111111111 - 4095
+    - 11111111111 - 2047
+  - number of letters to be interpreted
+  - 11111 - 31
+  - **display could use calligraphy(sort of like shodo) of the the main word (general topic or mood of the poem) this could be animated or static
+  - **display of poem could be animated:
+    - by revealing portions of it:
+        - with a typewriter efect,
+        - and AI narrator
+  - **should be white elements on some cool background (perfect loop dark colored video)
+  - ****🕵️‍♂️ encrypt like a spy 📜 write like a poet.
+  - ******alias that would check if today ive got a green square on git
+  - if (!isLoggedIn) google.accounts.id.prompt(); //one tap dialog - quicker login
