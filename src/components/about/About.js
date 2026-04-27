@@ -37,6 +37,6 @@ const About = () => {
 };
 
 //exported so that it can be imported and used in other parts of the application.
-//"export default" - allows when importing, giveing it any custom name like "import CustomName from './About'"
+//"export default" - allows when importing, giving it any custom name like "import CustomName from './About'"
 //otherwise - "export { About };" would require exact naming "import { About } from './About';"
 export default About;

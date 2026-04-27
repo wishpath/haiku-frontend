@@ -21,7 +21,10 @@ const HaikuComponent = () => {
     //asynchronous - tasks don't block each other
     //synchronous - tasks must complete one after another
     //async allows you to use await
+    //await - pauses current async task until awaited task finishes
     const handleCalculate = async () => {
+
+        //use established methods to set initial values
         setError('');
         setResult('');
         setLoading(true);
@@ -68,7 +71,10 @@ const HaikuComponent = () => {
             {(!haiku) && 
             <div className="input-group">
                 <label>
+
+                    {/* if secret flied has some value this will show a lable "secret:" on top */}
                     {(secret) && <span className="field-title">secret:</span>}
+                    
                     <input
                         type="text"
                         value={secret}
