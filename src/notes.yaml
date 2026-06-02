@@ -23,3 +23,54 @@ TODO:
   - ****🕵️‍♂️ encrypt like a spy 📜 write like a poet.
   - ******alias that would check if today ive got a green square on git
   - if (!isLoggedIn) google.accounts.id.prompt(); //one tap dialog - quicker login
+
+HOTKEYS:
+
+  NAVIGATION:
+    quick_open_file: "Ctrl+P (search filenames only)"
+    go_to_line: "Ctrl+G"
+    go_to_symbol_file: "Ctrl+Shift+O"
+    go_to_symbol_workspace: "Ctrl+T (search symbols/classes/functions)"
+    navigate_back: "Alt+Left (go to previous cursor/location in code)"
+    navigate_forward: "Alt+Right (go forward after navigating back)"
+    
+  SEARCHING:
+    search_in_file: "Ctrl+F"
+    search_in_project: "Ctrl+Shift+F (search inside file contents)"
+    replace_in_file: "Ctrl+H"
+    replace_across_all_project: "Ctrl+Shift+H (global replace across workspace)"
+
+  EDITING:
+    format_document: "Shift+Alt+F"
+    comment_toggle: "Ctrl+/"
+    duplicate_line: "Shift+Alt+Down / Up"
+    move_line: "Alt+Up / Down"
+    multi_cursor_add: "Alt+Click"
+    multi_cursor_all_occurrences: "Ctrl+Shift+L"
+    delete_line: "Ctrl+Shift+K"
+
+  SELECTION:
+    select_all: "Ctrl+A"
+    expand_selection: "Shift+Alt+Right"
+    shrink_selection: "Shift+Alt+Left"
+    select_next_occurrence: "Ctrl+D"
+
+  TERMINAL:
+    toggle_terminal: "Ctrl+`"
+    new_terminal: "Ctrl+Shift+`"
+    kill_terminal: "Ctrl+Shift+X"
+
+  FILE_MANAGEMENT:
+    save_file: "Ctrl+S"
+    save_all: "Ctrl+K S"
+    close_file: "Ctrl+W"
+    reopen_closed_file: "Ctrl+Shift+T"
+
+  COMMANDS:
+    command_palette: "Ctrl+Shift+P (central command hub for all VS Code actions)"
+    settings: "Ctrl+,"
+
+GIT:
+  copy_all_changes_to_clipboard:
+
+git diff HEAD > tmp.txt; git diff --staged >> tmp.txt; cat tmp.txt | clip

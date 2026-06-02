@@ -6,8 +6,6 @@ import './tool/LoginPage.css';
 import { LoginUtils } from './tool/LoginUtils';
 
 const LoginPage = () => {
-  // how login is accessed:
-  // LoginContext.js -> useContext(createContext()) -> useLoginContext() -> ... REACT MAGIC! ... -> LoginContext.Provider value -> login
   const { isLoggedIn, callLoginFromContext, callLogoutFromContext } = useLoginContext();
 
   function whenSomeoneTriesToLogInWithGoogle(response) { 
@@ -25,14 +23,13 @@ const LoginPage = () => {
   }
 
   useEffect(() => {
-    let savedToken;
+        let savedToken;
     if (isLoggedIn) LoginUtils.displayLogoutButton();
 
     //login from saved token
     else if (savedToken = localStorage.getItem('token')) { 
       const parsedToken = JSON.parse(savedToken);
       if (parsedToken && LoginUtils.credentialIsValid(parsedToken)) {
-        console.log("login from saved token in LoginPage.js");
         callLoginFromContext(parsedToken);
         LoginUtils.displayLogoutButton();
         return;
@@ -44,7 +41,7 @@ const LoginPage = () => {
     //login from google
     else {
       LoginUtils.initialiseAndRenderLoginButton(whenSomeoneTriesToLogInWithGoogle);
-      LoginUtils.displayLoginOrLogout(isLoggedIn);
+      LoginUtils.displayLoginOrLogout_dependentOnState(isLoggedIn);
     }
   }, [])
 

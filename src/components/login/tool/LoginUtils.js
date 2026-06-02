@@ -14,22 +14,19 @@ export class LoginUtils {
   static credentialIsValid(userObject) {
     const clientId = process.env.REACT_APP_OATH_CLIENT_ID;
     if (userObject.aud !== clientId) {
-      console.log("audience (aud) doesn't match the app's client ID");
       return false;
     }
     const currentTime = Math.floor(Date.now() / 1000); 
     if (!userObject.exp || userObject.exp < currentTime) {
-      console.log("token has expired");
       return false;
     } 
     if (!userObject.email_verified) {
-      console.log("email is not verified");
       return false;
     }
     return true;
   }
 
-  static displayLoginOrLogout(isLoggedIn) {
+  static displayLoginOrLogout_dependentOnState(isLoggedIn) {
     document.getElementById("LogInDiv").style.display = isLoggedIn ? 'none' : 'flex';
     document.getElementById("LogOutDiv").hidden = !isLoggedIn;
     document.getElementById("LogOutButton").hidden = !isLoggedIn;
@@ -47,11 +44,16 @@ export class LoginUtils {
 
 
   static initialiseAndRenderLoginButton(whenSomeoneTriesToLogInWithGoogle) {
+    let reactAppOathClientId = "178934486776-9u03nj51gi63idnl8lnphmias2frf8uf.apps.googleusercontent.com";
     /* global google */ //this comment has to be here, dont remove. defined in index.html as script http://accounts.google.com/gsi/client
     google.accounts.id.initialize({
-      client_id: process.env.REACT_APP_OATH_CLIENT_ID, // == System.getEnv(REACT_APP_OATH_CLIENT_ID) // this is my authentication for google api
+      //client_id is Google OAuth identifier for my app.
+      client_id: reactAppOathClientId,
       callback: whenSomeoneTriesToLogInWithGoogle
     });
+
+
+    //just injects google button into this LogInDiv element
     google.accounts.id.renderButton(
       document.getElementById("LogInDiv"),
       { theme: "outline", size: "large" }
