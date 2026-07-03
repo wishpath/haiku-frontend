@@ -23,26 +23,27 @@ export const LoginProvider = ({ children }) => {
   const [userObject, setUserObject] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const checkSavedTokenForContext = () => {
-    const savedToken = localStorage.getItem('token');
-    if (savedToken) {
-      const parsedToken = JSON.parse(savedToken);
-      if (parsedToken && LoginUtils.credentialIsValid(parsedToken)) {
-        callLoginFromContext(parsedToken);
-      } else {
+  const loadSavedLocalToken = () => {
+    const savedLocalToken = localStorage.getItem('token');
+    if (savedLocalToken) {
+      const parsedLocalToken = JSON.parse(savedLocalToken);
+      if (parsedLocalToken && LoginUtils.isCredentialValid(parsedLocalToken)) {
+        setLoggedInUser(parsedLocalToken);
+      } 
+      else {
         localStorage.removeItem('token');
       }
     }
   }
   
-  const callLoginFromContext = (userObject) => {
+  const setLoggedInUser = (userObject) => {
     setUserObject(userObject);
     setIsLoggedIn(true);
     localStorage.setItem('token', JSON.stringify(userObject));
   };
 
   
-  const callLogoutFromContext = () => {
+  const setLoggedOutState = () => {
     setUserObject('');
     setIsLoggedIn(false);
     localStorage.removeItem('token');
@@ -55,7 +56,7 @@ export const LoginProvider = ({ children }) => {
       if (isLoggedIn) {
         return;
       }
-      checkSavedTokenForContext();
+      loadSavedLocalToken();
     },
     
     //Dependency array. Controls when useEffect re-runs; empty = run once on mount (elements first load). some objects inside = run each time they change
@@ -70,7 +71,7 @@ export const LoginProvider = ({ children }) => {
             // a.k.a provider 
             // a.k.a <LoginProvider> 
             // a.k.a {{ userObject, isLoggedIn, callLoginFromContext, callLogoutFromContext, checkSavedTokenForContext }}
-    <LoginContext.Provider value={{ userObject, isLoggedIn, callLoginFromContext, callLogoutFromContext, checkSavedTokenForContext }}>
+    <LoginContext.Provider value={{ userObject, isLoggedIn, callLoginFromContext: setLoggedInUser, callLogoutFromContext: setLoggedOutState, checkSavedTokenForContext: loadSavedLocalToken }}>
       {/*'children' represents any components nested inside the LoginProvider
       indicating that these child components will have access to the context values provided by the LoginContext.Provider*/}
       {children}

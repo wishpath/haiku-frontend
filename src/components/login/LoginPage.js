@@ -10,7 +10,7 @@ const LoginPage = () => {
 
   function whenSomeoneTriesToLogInWithGoogle(response) { 
     var userObject = LoginUtils.decodeResponse(response);
-    if (userObject && LoginUtils.credentialIsValid(userObject)) {
+    if (userObject && LoginUtils.isCredentialValid(userObject)) {
       callLoginFromContext(userObject);
       LoginUtils.displayLogoutButton();
     }
@@ -29,7 +29,7 @@ const LoginPage = () => {
     //login from saved token
     else if (savedToken = localStorage.getItem('token')) { 
       const parsedToken = JSON.parse(savedToken);
-      if (parsedToken && LoginUtils.credentialIsValid(parsedToken)) {
+      if (parsedToken && LoginUtils.isCredentialValid(parsedToken)) {
         callLoginFromContext(parsedToken);
         LoginUtils.displayLogoutButton();
         return;

@@ -11,7 +11,7 @@ export class LoginUtils {
     }
   }
 
-  static credentialIsValid(userObject) {
+  static isCredentialValid(userObject) {
     const clientId = process.env.REACT_APP_OATH_CLIENT_ID;
     if (userObject.aud !== clientId) {
       return false;

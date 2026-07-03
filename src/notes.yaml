@@ -40,6 +40,14 @@ HOTKEYS:
     replace_in_file: "Ctrl+H"
     replace_across_all_project: "Ctrl+Shift+H (global replace across workspace)"
 
+  REFACTORING:
+    rename_symbol: "F2 (rename variable/method/class/project-wide)"
+    find_references: "Shift+F12 (find all usages)"
+    peek_references: "Alt+Shift+F12 (inline usages)"
+    go_to_definition: "F12"
+    peek_definition: "Alt+F12"
+    go_to_implementation: "Ctrl+F12"
+
   EDITING:
     format_document: "Shift+Alt+F"
     comment_toggle: "Ctrl+/"
@@ -72,5 +80,4 @@ HOTKEYS:
 
 GIT:
   copy_all_changes_to_clipboard:
-
-git diff HEAD > tmp.txt; git diff --staged >> tmp.txt; cat tmp.txt | clip
+    - git diff HEAD > tmp.txt; git diff --staged >> tmp.txt; cat tmp.txt | clip

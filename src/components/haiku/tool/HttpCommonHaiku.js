@@ -2,7 +2,7 @@ import axios from "axios";
 
 const backendUrl =
   window.location.hostname === "localhost"
-    ? "http://localhost:8080"       // local dev
+    ? "http://localhost:8080/"       // local dev
     : window.location.protocol === "http:"
         ? "http://129.151.221.35:8080" // any http
         : "/api"; // targetting for https://www.aruna.lt
