@@ -1,5 +1,7 @@
 TODO:
+  - send response.credential to backend, and receive UserObject
   - send token to backend to identify user and it's ability to access the calculations
+  - pratestuoti ar saugi autentikacija. naudoti išorinius įrankius
   - separate/isolate sessions for users
   - patestuoti nepavykusį prisijungimą
   - when does useEffect actually work? when i'm loading the element where its used? will it get used when i'm in different page where the element is not used?
@@ -39,6 +41,7 @@ HOTKEYS:
     search_in_project: "Ctrl+Shift+F (search inside file contents)"
     replace_in_file: "Ctrl+H"
     replace_across_all_project: "Ctrl+Shift+H (global replace across workspace)"
+    search_by_filename: "Ctrl+T"
 
   REFACTORING:
     rename_symbol: "F2 (rename variable/method/class/project-wide)"

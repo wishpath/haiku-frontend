@@ -28,7 +28,7 @@ export const LoginProvider = ({ children }) => {
     if (savedLocalToken) {
       const parsedLocalToken = JSON.parse(savedLocalToken);
       if (parsedLocalToken && LoginUtils.isCredentialValid(parsedLocalToken)) {
-        setLoggedInUser(parsedLocalToken);
+        setUserAsLoggedIn(parsedLocalToken);
       } 
       else {
         localStorage.removeItem('token');
@@ -36,7 +36,7 @@ export const LoginProvider = ({ children }) => {
     }
   }
   
-  const setLoggedInUser = (userObject) => {
+  const setUserAsLoggedIn = (userObject) => {
     setUserObject(userObject);
     setIsLoggedIn(true);
     localStorage.setItem('token', JSON.stringify(userObject));
@@ -50,7 +50,6 @@ export const LoginProvider = ({ children }) => {
   };
 
   useEffect(
-
     //the first parameter is the effect itself that we want to run - function
     () => { 
       if (isLoggedIn) {
@@ -60,6 +59,7 @@ export const LoginProvider = ({ children }) => {
     },
     
     //Dependency array. Controls when useEffect re-runs; empty = run once on mount (elements first load). some objects inside = run each time they change
+    //In this specific case this effect takes place when LoginProvider loads, so basically when the whole app loads.
     [] 
   )
 
@@ -71,7 +71,7 @@ export const LoginProvider = ({ children }) => {
             // a.k.a provider 
             // a.k.a <LoginProvider> 
             // a.k.a {{ userObject, isLoggedIn, callLoginFromContext, callLogoutFromContext, checkSavedTokenForContext }}
-    <LoginContext.Provider value={{ userObject, isLoggedIn, callLoginFromContext: setLoggedInUser, callLogoutFromContext: setLoggedOutState, checkSavedTokenForContext: loadSavedLocalToken }}>
+    <LoginContext.Provider value={{ userObject, isLoggedIn, callLoginFromContext: setUserAsLoggedIn, callLogoutFromContext: setLoggedOutState, checkSavedTokenForContext: loadSavedLocalToken }}>
       {/*'children' represents any components nested inside the LoginProvider
       indicating that these child components will have access to the context values provided by the LoginContext.Provider*/}
       {children}

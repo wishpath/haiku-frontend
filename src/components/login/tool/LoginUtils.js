@@ -71,11 +71,11 @@ export class LoginUtils {
         console.error("missing credential");
         return null;
     }
-    var userObject = LoginUtils.decodeEncodedUserObject(returnedEncodedUserObject);
-    if (!userObject) {
+    var decodedIdToken = decodeEncodedUserObject(returnedEncodedUserObject);
+    if (!decodedIdToken) {
         console.error("invalid JWT (JSON web token) format");
         return null;
     }
-    return userObject;
+    return decodedIdToken;
   }
 }
