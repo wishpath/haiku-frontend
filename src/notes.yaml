@@ -1,5 +1,4 @@
 TODO:
-  - send response.credential to backend, and receive UserObject
   - send token to backend to identify user and it's ability to access the calculations
   - pratestuoti ar saugi autentikacija. naudoti išorinius įrankius
   - separate/isolate sessions for users
@@ -27,6 +26,7 @@ TODO:
   - if (!isLoggedIn) google.accounts.id.prompt(); //one tap dialog - quicker login
 
 HOTKEYS:
+  see_hotkeys: "Ctrl+k ctrl+s"
 
   NAVIGATION:
     quick_open_file: "Ctrl+P (search filenames only)"
@@ -35,7 +35,13 @@ HOTKEYS:
     go_to_symbol_workspace: "Ctrl+T (search symbols/classes/functions)"
     navigate_back: "Alt+Left (go to previous cursor/location in code)"
     navigate_forward: "Alt+Right (go forward after navigating back)"
-    
+    find_references: "Shift+F12 (find all usages)"
+    peek_references: "Alt+Shift+F12 (inline usages)"
+    go_to_definition: "F12"
+    peek_definition: "Alt+F12"
+    go_to_implementation: "Ctrl+F12"
+    show_active_file_in_tree: "custom: ctrl+2 ctrl+1"
+
   SEARCHING:
     search_in_file: "Ctrl+F"
     search_in_project: "Ctrl+Shift+F (search inside file contents)"
@@ -45,11 +51,6 @@ HOTKEYS:
 
   REFACTORING:
     rename_symbol: "F2 (rename variable/method/class/project-wide)"
-    find_references: "Shift+F12 (find all usages)"
-    peek_references: "Alt+Shift+F12 (inline usages)"
-    go_to_definition: "F12"
-    peek_definition: "Alt+F12"
-    go_to_implementation: "Ctrl+F12"
 
   EDITING:
     format_document: "Shift+Alt+F"
@@ -80,6 +81,9 @@ HOTKEYS:
   COMMANDS:
     command_palette: "Ctrl+Shift+P (central command hub for all VS Code actions)"
     settings: "Ctrl+,"
+  
+  INTERFACE:
+    leave_one_tab: "Right-click the tab → Close Others"
 
 GIT:
   copy_all_changes_to_clipboard:
