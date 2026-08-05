@@ -13,13 +13,19 @@ const getSecret = (haiku) => {
 };
 
 const backendAuthenticate = (idToken) => {
-    //idToken — is taken imediately from response from google: response.credential
-    //returns 
-        // UserObject and response code 200, when success.
-            //UserObject
-                //As JSON in the HTTP response body, e.g. { "id":1, "email":"a@b.com", "roles":["USER"] }
-        //returns 401 (unauthorized) when failure.
-        
+    // idToken is taken immediately from Google's login response: response.credential.
+    // On success, backend verifies the token, creates a server-side session,
+    // and browser automatically stores the returned SESSION_ID cookie.
+    
+    // Returns UserObject (200):
+    // {
+    //   googleId: "12345678901234567890",
+    //   email: "john@example.com",
+    //   given_name: "John",
+    //   picture: "https://lh3.googleusercontent.com/..."
+    // }
+    
+    // Returns 401 (Unauthorized) on authentication failure.
     return httpClient.post(
         '/authenticate', 
         // request body (data sent to backend)
