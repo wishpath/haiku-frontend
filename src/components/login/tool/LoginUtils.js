@@ -60,7 +60,7 @@ export class LoginUtils {
     );
   }
 
-
+  
   static decodeResponse(response) {
     if (!response) {
         console.error("response is null");

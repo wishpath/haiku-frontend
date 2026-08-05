@@ -11,7 +11,7 @@ const LoginContext = createContext();
 //through this "useLoginContext()" will be accessed:
   // provider 
   // a.k.a <LoginProvider> 
-  // a.k.a {{ userObject, isLoggedIn, callLoginFromContext, callLogoutFromContext, checkSavedTokenForContext }}
+  // a.k.a {{ userObject, isLoggedIn, setUserAsLoggedIn, setLoggedOutState, checkSavedTokenForContext }}
 export const useLoginContext = () => useContext(LoginContext);
 
 
@@ -70,8 +70,8 @@ export const LoginProvider = ({ children }) => {
           //useLoginContext()
             // a.k.a provider 
             // a.k.a <LoginProvider> 
-            // a.k.a {{ userObject, isLoggedIn, callLoginFromContext, callLogoutFromContext, checkSavedTokenForContext }}
-    <LoginContext.Provider value={{ userObject, isLoggedIn, callLoginFromContext: setUserAsLoggedIn, callLogoutFromContext: setLoggedOutState, checkSavedTokenForContext: loadSavedLocalToken }}>
+            // a.k.a {{ userObject, isLoggedIn, setUserAsLoggedIn, setLoggedOutState, checkSavedTokenForContext }}
+    <LoginContext.Provider value={{ userObject, isLoggedIn, setUserAsLoggedIn, setLoggedOutState, checkSavedTokenForContext: loadSavedLocalToken }}>
       {/*'children' represents any components nested inside the LoginProvider
       indicating that these child components will have access to the context values provided by the LoginContext.Provider*/}
       {children}

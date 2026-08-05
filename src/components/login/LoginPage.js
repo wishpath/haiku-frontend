@@ -7,7 +7,7 @@ import { LoginUtils } from './tool/LoginUtils';
 import haikuService from '../haiku/tool/ServiceHaiku';
 
 const LoginPage = () => {
-  const { isLoggedIn, callLoginFromContext, callLogoutFromContext } = useLoginContext();
+  const { isLoggedIn, setUserAsLoggedIn, setLoggedOutState } = useLoginContext(); // those are defined in LoginContext.js
 
   function whenSomeoneTriesToLogInWithGoogle(response) {
 
@@ -16,7 +16,7 @@ const LoginPage = () => {
       //await here waits for the finished actions and returns concrete result (not a Promise)
       const backendAuthorisationResponse = await haikuService.backendAuthenticate(response.credential);
       const responseCode = backendAuthorisationResponse.status;
-      if (responseCode === 401) console.log("Authentication failed: unauthorized");
+      if (responseCode === 401) console.log("Authentication failed: unauthorized, code: 401");
       else if (responseCode !== 200) console.log("Authentication failed: response code " + responseCode);
       else {
         let userObject = backendAuthorisationResponse.data; //axios parses json text to object here
@@ -24,7 +24,7 @@ const LoginPage = () => {
           console.log("Backend returned empty user object");
           return;
         }
-        callLoginFromContext(userObject);
+        setUserAsLoggedIn(userObject);
         LoginUtils.displayLogoutButton();
         console.log("Authorized successfully using backend")
         return;
@@ -36,15 +36,17 @@ const LoginPage = () => {
     
     // temporary fallback: remove after backend authentication is stable
     // old frontend authentication
+
+
     var decodedIdToken = LoginUtils.decodeResponse(response);
     if (decodedIdToken && LoginUtils.isCredentialValid(decodedIdToken)) {
-      callLoginFromContext(decodedIdToken);
+      setUserAsLoggedIn(decodedIdToken);
       LoginUtils.displayLogoutButton();
     }
   }
 
   function whenSomeoneLogsOut() {
-    callLogoutFromContext();
+    setLoggedOutState();
     LoginUtils.displayLoginButton();
     LoginUtils.initialiseAndRenderLoginButton(whenSomeoneTriesToLogInWithGoogle);
   }
@@ -57,7 +59,7 @@ const LoginPage = () => {
     else if (savedToken = localStorage.getItem('token')) { 
       const parsedToken = JSON.parse(savedToken);
       if (parsedToken && LoginUtils.isCredentialValid(parsedToken)) {
-        callLoginFromContext(parsedToken);
+        setUserAsLoggedIn(parsedToken);
         LoginUtils.displayLogoutButton();
         return;
       } else {
