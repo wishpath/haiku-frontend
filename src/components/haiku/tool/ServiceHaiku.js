@@ -39,4 +39,11 @@ const backendLogout = () => {
     return httpClient.post('/logout');
 };
 
-export default { getHaiku, getSecret, backendAuthenticate, backendLogout };
+const getUserObject = () => {
+    // Browser automatically sends the SESSION_ID cookie with this request (if one exists).
+    // Backend uses the cookie to find the server-side UserObject.
+    // Returns UserObject (200) when the session is valid, or 401 (Unauthorized) otherwise.
+    return httpClient.get('/get-user-object');
+};
+
+export default { getHaiku, getSecret, backendAuthenticate, backendLogout, getUserObject };

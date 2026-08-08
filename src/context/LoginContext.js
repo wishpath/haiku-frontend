@@ -1,6 +1,7 @@
 // src/context/LoginContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { LoginUtils } from './../components/login/tool/LoginUtils';
+import haikuService from 'components/haiku/tool/ServiceHaiku';
 
 //creates context Object. This object has two components: Provider and Consumer
 //Provider provides way to share State
@@ -22,24 +23,10 @@ export const LoginProvider = ({ children }) => {
   //the actual login state lives in tese object (within array)
   const [userObject, setUserObject] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const loadSavedLocalToken = () => {
-    const savedLocalToken = localStorage.getItem('token');
-    if (savedLocalToken) {
-      const parsedLocalToken = JSON.parse(savedLocalToken);
-      if (parsedLocalToken && LoginUtils.isCredentialValid(parsedLocalToken)) {
-        setUserAsLoggedIn(parsedLocalToken);
-      } 
-      else {
-        localStorage.removeItem('token');
-      }
-    }
-  }
   
   const setUserAsLoggedIn = (userObject) => {
     setUserObject(userObject);
     setIsLoggedIn(true);
-    localStorage.setItem('token', JSON.stringify(userObject));
   };
 
   
@@ -49,19 +36,34 @@ export const LoginProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
-  useEffect(
-    //the first parameter is the effect itself that we want to run - function
-    () => { 
-      if (isLoggedIn) {
-        return;
-      }
-      loadSavedLocalToken();
-    },
+  useEffect(() => {
+      const checkBackendAuthorization = async () => {
+        try {
+          const response = await haikuService.getUserObject();
+          const userObject = response.data;
+
+          if (!userObject) {
+              console.log("Backend returned empty user object");
+              setLoggedOutState();
+              return;
+          }
+
+          setUserAsLoggedIn(userObject);
+          LoginUtils.displayLogoutButton();
+          console.log("Authorized successfully using backend");
+        } catch (error) {
+          console.log("User is not authorized");
+          setLoggedOutState();
+        }
+      };
+
+      if (!isLoggedIn && userObject === '') checkBackendAuthorization();
+    }, 
     
     //Dependency array. Controls when useEffect re-runs; empty = run once on mount (elements first load). some objects inside = run each time they change
     //In this specific case this effect takes place when LoginProvider loads, so basically when the whole app loads.
-    [] 
-  )
+    []
+  );
 
   return (
     //formulates LoginProvider as Component: "<LoginProvider>"
@@ -70,8 +72,8 @@ export const LoginProvider = ({ children }) => {
           //useLoginContext()
             // a.k.a provider 
             // a.k.a <LoginProvider> 
-            // a.k.a {{ userObject, isLoggedIn, setUserAsLoggedIn, setLoggedOutState, checkSavedTokenForContext }}
-    <LoginContext.Provider value={{ userObject, isLoggedIn, setUserAsLoggedIn, setLoggedOutState, checkSavedTokenForContext: loadSavedLocalToken }}>
+            // a.k.a {{ userObject, isLoggedIn, setUserAsLoggedIn, setLoggedOutState  }}
+    <LoginContext.Provider value={{ userObject, isLoggedIn, setUserAsLoggedIn, setLoggedOutState }}>
       {/*'children' represents any components nested inside the LoginProvider
       indicating that these child components will have access to the context values provided by the LoginContext.Provider*/}
       {children}

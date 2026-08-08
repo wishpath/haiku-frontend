@@ -1,5 +1,4 @@
 TODO:
-  - send token to backend to identify user and it's ability to access the calculations
   - pratestuoti ar saugi autentikacija. naudoti išorinius įrankius
   - separate/isolate sessions for users
   - patestuoti nepavykusį prisijungimą
