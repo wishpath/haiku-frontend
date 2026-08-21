@@ -1,7 +1,7 @@
 // src/context/LoginContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { LoginUtils } from './../components/login/tool/LoginUtils';
-import haikuService from 'components/haiku/tool/ServiceHaiku';
+import haikuService from './../components/haiku/tool/ServiceHaiku';
 
 //creates context Object. This object has two components: Provider and Consumer
 //Provider provides way to share State
