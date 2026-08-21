@@ -7,11 +7,9 @@ import { LoginUtils } from './tool/LoginUtils';
 import haikuService from '../haiku/tool/ServiceHaiku';
 
 const LoginPage = () => {
-  const { isLoggedIn, setUserAsLoggedIn, setLoggedOutState } = useLoginContext(); // those are defined in LoginContext.js
+  const { isLoggedIn, setUserAsLoggedIn, setLoggedOutState, tryToLoginFromBackend } = useLoginContext(); // those are defined in LoginContext.js
 
-  function whenSomeoneTriesToLogInWithGoogle(response) {
-
-    //backend authentication
+  async function whenSomeoneTriesToLogInWithGoogle(response) {
     try {
       //await here waits for the finished actions and returns concrete result (not a Promise)
       const backendAuthorisationResponse = await haikuService.backendAuthenticate(response.credential);
@@ -33,16 +31,6 @@ const LoginPage = () => {
     catch (error) {
       console.log("backend authorisation has failed");
     }
-    
-    // temporary fallback: remove after backend authentication is stable
-    // old frontend authentication
-
-
-    var decodedIdToken = LoginUtils.decodeResponse(response);
-    if (decodedIdToken && LoginUtils.isCredentialValid(decodedIdToken)) {
-      setUserAsLoggedIn(decodedIdToken);
-      LoginUtils.displayLogoutButton();
-    }
   }
 
   function whenSomeoneLogsOut() {
@@ -52,25 +40,12 @@ const LoginPage = () => {
   }
 
   useEffect(() => {
-    let savedToken;
     if (isLoggedIn) LoginUtils.displayLogoutButton();
-
-    //login from saved token
-    else if (savedToken = localStorage.getItem('token')) { 
-      const parsedToken = JSON.parse(savedToken);
-      if (parsedToken && LoginUtils.isCredentialValid(parsedToken)) {
-        setUserAsLoggedIn(parsedToken);
-        LoginUtils.displayLogoutButton();
-        return;
-      } else {
-        localStorage.removeItem('token');
+    else { 
+      if (!isLoggedIn) {
+        LoginUtils.initialiseAndRenderLoginButton(whenSomeoneTriesToLogInWithGoogle);
+        LoginUtils.displayLoginOrLogout_dependentOnState(false);
       }
-    }
-
-    //login from google
-    else {
-      LoginUtils.initialiseAndRenderLoginButton(whenSomeoneTriesToLogInWithGoogle);
-      LoginUtils.displayLoginOrLogout_dependentOnState(isLoggedIn);
     }
   }, [])
 

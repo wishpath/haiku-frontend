@@ -1,12 +1,8 @@
 TODO:
   - pratestuoti ar saugi autentikacija. naudoti išorinius įrankius
   - separate/isolate sessions for users
-  - patestuoti nepavykusį prisijungimą
   - when does useEffect actually work? when i'm loading the element where its used? will it get used when i'm in different page where the element is not used?
-  - token	undefined !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  - how to make login token safe from tampering?
   - mess with hights in navbar when clicking on links
-  - handle e in the front of secret eeeeeees or e  or eeeeeeee
   - handle empty secret messages like ąčęūėųšęč9ėūąųčę
   - atsiradęs error nenukrenta: "500" po "e" klaidos
   - number of haiku dictionary words for binary conversion:

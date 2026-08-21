@@ -2,30 +2,6 @@ import { jwtDecode } from 'jwt-decode'; //function to decode jwt - jason web tok
 
 export class LoginUtils {
 
-  static decodeEncodedUserObject(returnedEncodedUserObject) {
-    try {
-      return jwtDecode(returnedEncodedUserObject);
-    } catch (error) {
-      console.error("Invalid JWT format:", error);
-      return null;
-    }
-  }
-
-  static isCredentialValid(userObject) {
-    const clientId = process.env.REACT_APP_OATH_CLIENT_ID;
-    if (userObject.aud !== clientId) {
-      return false;
-    }
-    const currentTime = Math.floor(Date.now() / 1000); 
-    if (!userObject.exp || userObject.exp < currentTime) {
-      return false;
-    } 
-    if (!userObject.email_verified) {
-      return false;
-    }
-    return true;
-  }
-
   static displayLoginOrLogout_dependentOnState(isLoggedIn) {
     document.getElementById("LogInDiv").style.display = isLoggedIn ? 'none' : 'flex';
     document.getElementById("LogOutDiv").hidden = !isLoggedIn;
@@ -58,24 +34,5 @@ export class LoginUtils {
       document.getElementById("LogInDiv"),
       { theme: "outline", size: "large" }
     );
-  }
-
-  
-  static decodeResponse(response) {
-    if (!response) {
-        console.error("response is null");
-        return null;
-    }
-    var returnedEncodedUserObject = response.credential;
-    if (!returnedEncodedUserObject) {
-        console.error("missing credential");
-        return null;
-    }
-    var decodedIdToken = decodeEncodedUserObject(returnedEncodedUserObject);
-    if (!decodedIdToken) {
-        console.error("invalid JWT (JSON web token) format");
-        return null;
-    }
-    return decodedIdToken;
   }
 }

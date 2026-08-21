@@ -33,31 +33,32 @@ export const LoginProvider = ({ children }) => {
   const setLoggedOutState = () => {
     setUserObject('');
     setIsLoggedIn(false);
-    localStorage.removeItem('token');
+  };
+
+  
+  // async allows this method to wait for the backend response using await
+  const tryToLoginFromBackend = async () => {
+    try {
+      const response = await haikuService.getUserObject();
+      const userObject = response.data;
+
+      if (!userObject) {
+          console.log("Backend returned empty user object");
+          setLoggedOutState();
+          return;
+      }
+
+      setUserAsLoggedIn(userObject);
+      LoginUtils.displayLogoutButton();
+      console.log("Authorized successfully using backend");
+    } catch (error) {
+      console.log("User is not authorized");
+      setLoggedOutState();
+    }
   };
 
   useEffect(() => {
-      const checkBackendAuthorization = async () => {
-        try {
-          const response = await haikuService.getUserObject();
-          const userObject = response.data;
-
-          if (!userObject) {
-              console.log("Backend returned empty user object");
-              setLoggedOutState();
-              return;
-          }
-
-          setUserAsLoggedIn(userObject);
-          LoginUtils.displayLogoutButton();
-          console.log("Authorized successfully using backend");
-        } catch (error) {
-          console.log("User is not authorized");
-          setLoggedOutState();
-        }
-      };
-
-      if (!isLoggedIn && userObject === '') checkBackendAuthorization();
+      if (!isLoggedIn || userObject === '') tryToLoginFromBackend();
     }, 
     
     //Dependency array. Controls when useEffect re-runs; empty = run once on mount (elements first load). some objects inside = run each time they change
@@ -73,7 +74,7 @@ export const LoginProvider = ({ children }) => {
             // a.k.a provider 
             // a.k.a <LoginProvider> 
             // a.k.a {{ userObject, isLoggedIn, setUserAsLoggedIn, setLoggedOutState  }}
-    <LoginContext.Provider value={{ userObject, isLoggedIn, setUserAsLoggedIn, setLoggedOutState }}>
+    <LoginContext.Provider value={{ userObject, isLoggedIn, setUserAsLoggedIn, setLoggedOutState, tryToLoginFromBackend }}>
       {/*'children' represents any components nested inside the LoginProvider
       indicating that these child components will have access to the context values provided by the LoginContext.Provider*/}
       {children}
