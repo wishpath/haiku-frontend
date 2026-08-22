@@ -15,6 +15,9 @@ const backendUrl =
 
 export default axios.create({
     baseURL: backendUrl,
+    // allow browser to send/receive cookies
+    // because this is a cross-origin request in case of localhost (port 3000 to port 8080)
+    withCredentials: true, 
     headers: {
         'Content-Type': 'application/json'
     }
